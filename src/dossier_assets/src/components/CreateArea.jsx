@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import CreateIcon from "@mui/icons-material/Create";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
-// import { dossier } from "../../../declarations/dossier";
-// import { Principal } from "@dfinity/principal";
+import { dossier } from "../../../declarations/dossier";
+import { Principal } from "@dfinity/principal";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
@@ -32,14 +32,33 @@ function CreateArea(props) {
     });
   }
 
-  // async function transact() {
-  //   // const result = await dossier.transfer(Principal, 1);
-  //   console.log(Principal);
-  //   // console.log(result);
-  // }
+  async function transact() {
+    const recipient = Principal.fromText("rrkah-fqaaa-aaaaa-aaaaq-cai");
+    const amountToTransfer = Number(1);
+
+    //Live Network
+    // const authClient = await AuthClient.create();
+    // const identity = await authClient.getIdentity();
+
+    // const authenticatedCanister = createActor(canisterId, {
+    //   agentOptions: {
+    //     identity,
+    //   },
+    // });
+
+    // const result = await authenticatedCanister.transfer(
+    //   recipient,
+    //   amountToTransfer
+    // );
+
+    //Local Network
+    const result = await dossier.transfer(recipient, amountToTransfer);
+    console.log(result);
+    //
+  }
 
   function submitLog(event) {
-    // transact();
+    transact();
     props.onAdd(log);
     setLog({
       title: "",

@@ -6,12 +6,6 @@ import CreateArea from "../components/CreateArea";
 import { dossier } from "../../../declarations/dossier";
 import { Principal } from "@dfinity/principal";
 
-//
-// import { idlFactory } from "../../../declarations/dossierFinance";
-// import { Actor, HttpAgent } from "@dfinity/agent";
-// import { Principal } from "@dfinity/principal";
-//
-
 function Dossier(props) {
   const [logs, setLogs] = useState([]);
   const [balanceResult, setBalanceResult] = useState("0");
@@ -50,18 +44,6 @@ function Dossier(props) {
       });
     });
   }
-
-  // const localHost = "http://localhost:8080/";
-  // const agent = new HttpAgent({ host: localHost });
-  // async function getData() {
-  //   const dossierFinanceActor = await Actor.createActor(idlFactory, {
-  //     agent,
-  //     canisterId: Principal.fromText("kvl3e-4yaaa-aaaap-aam5a-cai"),
-  //   });
-
-  //   const result = await dossierFinanceActor.payOut();
-  //   console.log(result);
-  // }
 
   return (
     <div>

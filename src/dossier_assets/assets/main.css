@@ -37,6 +37,10 @@ body {
   color: rgb(0, 213, 255);
 }
 
+.dossierFinance-header h6 {
+  color: #66fcf1;
+}
+
 /* Form Box */
 
 form.create-log {
