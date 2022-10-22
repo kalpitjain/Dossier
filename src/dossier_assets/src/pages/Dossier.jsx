@@ -31,7 +31,7 @@ function Dossier(props) {
   }
 
   function deleteLog(id) {
-    // dossier.removeLog(id);
+    dossier.removeLog(id);
     setLogs((prevLogs) => {
       return prevLogs.filter((logItem, index) => {
         return index !== id;

@@ -6,7 +6,11 @@ type Log =
    title: text;
  };
 service : {
+  balanceOf: (principal) -> (nat) query;
   createLog: (text, text, text, text) -> () oneway;
+  getSymbol: () -> (text) query;
+  payOut: () -> (text);
   readLogs: () -> (vec Log) query;
   removeLog: (nat) -> () oneway;
+  transfer: (principal, nat) -> (text);
 }
