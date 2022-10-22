@@ -83,18 +83,7 @@ actor dossier{
       return "Aready Claimed";
     }
   };
-
-
-  // temp
-  // public shared(msg) func payOut(): async Text{
-  //   Debug.print(debug_show(msg.caller));
-  //     let amount = 500;
-  //     let result = "Success";
-  //     balances.put(msg.caller, amount);
-  //     return result;
-  // };
-
-
+  
   //Transfer Block
 
   public shared(msg) func transfer(to: Principal, amount: Nat): async Text{
