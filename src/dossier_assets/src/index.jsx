@@ -3,43 +3,42 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dossier from "./pages/Dossier";
 import DossierFinance from "./pages/DossierFinance";
+import { AuthClient } from "@dfinity/auth-client";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <Router>
-    <Routes>
-      <Route path="/" element={<Dossier />} />
-      <Route path="/DossierFinance" element={<DossierFinance />} />
-    </Routes>
-  </Router>
-);
+const init = async () => {
+  const authClient = await AuthClient.create();
 
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-// import App from "./components/App";
-// import { AuthClient } from "@dfinity/auth-client";
+  if (await authClient.isAuthenticated()) {
+    handleAuthenticated(authClient);
+  } else {
+    await authClient.login({
+      identityProvider: "https://identity.ic0.app/#authorize",
+      onSuccess: () => {
+        handleAuthenticated(authClient);
+      },
+    });
+  }
+};
 
-// const init = async () => {
-//   const authClient = await AuthClient.create();
+async function handleAuthenticated(authClient) {
+  const identity = await authClient.getIdentity();
+  const userPrincipal = identity._principal.toString();
 
-//   if (await authClient.isAuthenticated()) {
-//     handleAuthenticated(authClient);
-//   } else {
-//     await authClient.login({
-//       identityProvider: "https://identity.ic0.app/#authorize",
-//       onSuccess: () => {
-//         handleAuthenticated(authClient);
-//       },
-//     });
-//   }
-// };
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={<Dossier loggedInPrincipal={userPrincipal} />}
+        />
+        <Route
+          path="/DossierFinance"
+          element={<DossierFinance loggedInPrincipal={userPrincipal} />}
+        />
+      </Routes>
+    </Router>
+  );
+}
 
-// async function handleAuthenticated(authClient) {
-//   const identity = await authClient.getIdentity();
-//   const userPrincipal = identity._principal.toString();
-
-//   const root = ReactDOM.createRoot(document.getElementById("root"));
-//   root.render(<App loggedInPrincipal={userPrincipal} />);
-// }
-
-// init();
+init();

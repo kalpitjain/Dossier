@@ -1,35 +1,35 @@
 import React, { useState } from "react";
-// import {
-//   dossierFinance,
-//   canisterId,
-//   createActor,
-// } from "../../../declarations/dossierFinance";
-// import { AuthClient } from "@dfinity/auth-client";
+import {
+  // dossier,
+  canisterId,
+  createActor,
+} from "../../../declarations/dossier";
+import { AuthClient } from "@dfinity/auth-client";
 
 function Faucet(props) {
-  // const initialMessage = "Claim 30 DOSS Token to " + props.userPrincipal;
+  const initialMessage = "Claim 500 DOSS Token to " + props.userPrincipal;
   const [isDisabled, setDisabled] = useState(false);
-  // const [messageText, setMessageText] = useState(initialMessage);
+  const [messageText, setMessageText] = useState(initialMessage);
 
   async function handleClick(event) {
     setDisabled(true);
 
-    // //Live Network
-    // const authClient = await AuthClient.create();
-    // const identity = await authClient.getIdentity();
+    //Live Network
+    const authClient = await AuthClient.create();
+    const identity = await authClient.getIdentity();
 
-    // const authenticatedCanister = createActor(canisterId, {
-    //   agentOptions: {
-    //     identity,
-    //   },
-    // });
+    const authenticatedCanister = createActor(canisterId, {
+      agentOptions: {
+        identity,
+      },
+    });
 
-    // const result = await authenticatedCanister.payOut();
+    const result = await authenticatedCanister.payOut();
 
     // // Local Network
-    // const result = await dossierFinance.payOut();
+    // const result = await dossier.payOut();
 
-    // setMessageText(result);
+    setMessageText(result);
   }
 
   return (
@@ -37,7 +37,7 @@ function Faucet(props) {
       <h1 className="dossierFinance-heading">Faucet</h1>
 
       <h6>Get your free Dossier tokens here!</h6>
-      <h6>{/* {messageText} */}!</h6>
+      <h6>{messageText}!</h6>
 
       <button
         disabled={isDisabled}

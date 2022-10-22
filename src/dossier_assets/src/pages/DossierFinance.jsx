@@ -11,9 +11,7 @@ function DossierFinance(props) {
       <DossierFinanceHeader />
       <div className="row">
         <div className="col-lg-6 set-border">
-          <Faucet
-          // userPrincipal={props.loggedInPrincipal}
-          />
+          <Faucet userPrincipal={props.loggedInPrincipal} />
         </div>
         <div className="col-lg-6 set-border">
           <Balance />

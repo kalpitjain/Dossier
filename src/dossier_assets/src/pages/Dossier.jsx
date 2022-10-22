@@ -1,12 +1,9 @@
-import React, {
-  // useEffect,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import DossierHeader from "../components/DossierHeader";
 import DossierFooter from "../components/DossierFooter";
 import Log from "../components/Log";
 import CreateArea from "../components/CreateArea";
-// import { dossier } from "../../../declarations/dossier";
+import { dossier } from "../../../declarations/dossier";
 
 //
 // import { idlFactory } from "../../../declarations/dossierFinance";
@@ -19,24 +16,19 @@ function Dossier(props) {
 
   function addLog(newLog) {
     setLogs((prevLogs) => {
-      // dossier.createLog(
-      //   newLog.title,
-      //   newLog.content,
-      //   newLog.time,
-      //   newLog.date
-      // );
+      dossier.createLog(newLog.title, newLog.content, newLog.time, newLog.date);
       return [newLog, ...prevLogs];
     });
   }
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  // async function fetchData() {
-  //   const logArray = await dossier.readLogs();
-  //   setLogs(logArray);
-  // }
+  async function fetchData() {
+    const logArray = await dossier.readLogs();
+    setLogs(logArray);
+  }
 
   function deleteLog(id) {
     // dossier.removeLog(id);
