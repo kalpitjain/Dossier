@@ -4,6 +4,7 @@ import DossierFooter from "../components/DossierFooter";
 import Log from "../components/Log";
 import CreateArea from "../components/CreateArea";
 import { dossier } from "../../../declarations/dossier";
+import { Principal } from "@dfinity/principal";
 
 //
 // import { idlFactory } from "../../../declarations/dossierFinance";
@@ -13,6 +14,17 @@ import { dossier } from "../../../declarations/dossier";
 
 function Dossier(props) {
   const [logs, setLogs] = useState([]);
+  const [balanceResult, setBalanceResult] = useState("0");
+
+  async function getBalance() {
+    const balance = await dossier.balanceOf(
+      Principal.fromText(props.loggedInPrincipal)
+    );
+
+    setBalanceResult(balance.toLocaleString());
+  }
+
+  getBalance();
 
   function addLog(newLog) {
     setLogs((prevLogs) => {
@@ -53,8 +65,15 @@ function Dossier(props) {
 
   return (
     <div>
-      <DossierHeader userPrincipal={props.loggedInPrincipal} />
-      <CreateArea onAdd={addLog} />
+      <DossierHeader
+        userPrincipal={props.loggedInPrincipal}
+        userFunds={balanceResult}
+      />
+      <CreateArea
+        onAdd={addLog}
+        userPrincipal={props.loggedInPrincipal}
+        userFunds={balanceResult}
+      />
       {logs.map((logItem, index) => {
         return (
           <Log
@@ -65,6 +84,8 @@ function Dossier(props) {
             time={logItem.time}
             date={logItem.date}
             onDelete={deleteLog}
+            userPrincipal={props.loggedInPrincipal}
+            userFunds={balanceResult}
           />
         );
       })}

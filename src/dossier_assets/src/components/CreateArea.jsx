@@ -60,11 +60,14 @@ function CreateArea(props) {
 
         <textarea
           name="content"
+          value={log.content}
+          placeholder={
+            props.userFunds > 5 ? "Take a log..." : "! Insufficient Funds !"
+          }
+          rows={isExpanded ? 3 : 1}
+          disabled={props.userFunds > 5 ? false : true}
           onClick={expand}
           onChange={handleChange}
-          value={log.content}
-          placeholder="Take a log..."
-          rows={isExpanded ? 3 : 1}
         />
         <Zoom in={isExpanded}>
           <Fab onClick={submitLog}>

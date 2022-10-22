@@ -47,7 +47,10 @@ function Log(props) {
         {props.date}
       </p>
 
-      <button onClick={handleDeleteClick}>
+      <button
+        disabled={props.userFunds > 500 ? false : true}
+        onClick={handleDeleteClick}
+      >
         <DeleteIcon />
       </button>
     </div>
