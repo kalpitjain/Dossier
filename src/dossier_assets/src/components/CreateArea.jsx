@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import CreateIcon from "@mui/icons-material/Create";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
+// import { dossier } from "../../../declarations/dossier";
+// import { Principal } from "@dfinity/principal";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
@@ -30,7 +32,14 @@ function CreateArea(props) {
     });
   }
 
+  // async function transact() {
+  //   // const result = await dossier.transfer(Principal, 1);
+  //   console.log(Principal);
+  //   // console.log(result);
+  // }
+
   function submitLog(event) {
+    // transact();
     props.onAdd(log);
     setLog({
       title: "",
@@ -62,7 +71,7 @@ function CreateArea(props) {
           name="content"
           value={log.content}
           placeholder={
-            props.userFunds > 5 ? "Take a log..." : "! Insufficient Funds !"
+            props.userFunds > 5 ? "Create a log..." : "! Insufficient Funds !"
           }
           rows={isExpanded ? 3 : 1}
           disabled={props.userFunds > 5 ? false : true}
@@ -74,6 +83,7 @@ function CreateArea(props) {
             <CreateIcon />
           </Fab>
         </Zoom>
+        <p>Create a Log for 5 DOSS</p>
       </form>
     </div>
   );

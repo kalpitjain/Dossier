@@ -77,6 +77,10 @@ form.create-log button {
   text-align: center;
 }
 
+form.create-log p {
+  opacity: 50%;
+}
+
 /* Log */
 
 .log {
