@@ -53,6 +53,7 @@ function Transfer() {
             type="text"
             id="transfer-to-id"
             spellCheck="false"
+            placeholder="  Enter Principal ID"
             value={recipientId}
             onChange={(e) => {
               setRecipientId(e.target.value);
@@ -65,6 +66,7 @@ function Transfer() {
             type="number"
             id="amount"
             spellCheck="false"
+            placeholder="  Enter Amount"
             value={amount}
             onChange={(e) => {
               setAmount(e.target.value);

@@ -34,7 +34,7 @@ function CreateArea(props) {
 
   async function transact() {
     const recipient = Principal.fromText("rrkah-fqaaa-aaaaa-aaaaq-cai");
-    const amountToTransfer = Number(1);
+    const amountToTransfer = Number(0);
 
     //Live Network
     // const authClient = await AuthClient.create();
@@ -90,7 +90,11 @@ function CreateArea(props) {
           name="content"
           value={log.content}
           placeholder={
-            props.userFunds > 5 ? "Create a log..." : "! Insufficient Funds !"
+            props.userFunds > 5
+              ? isExpanded
+                ? " Create a Log..."
+                : "Create a Log for 5 DOSS "
+              : "! Insufficient Funds !"
           }
           rows={isExpanded ? 3 : 1}
           disabled={props.userFunds > 5 ? false : true}
@@ -102,7 +106,7 @@ function CreateArea(props) {
             <CreateIcon />
           </Fab>
         </Zoom>
-        <p>Create a Log for 5 DOSS</p>
+        <p hidden={isExpanded ? false : true}>Create a Log for 5 DOSS</p>
       </form>
     </div>
   );

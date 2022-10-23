@@ -8,7 +8,7 @@ function Log(props) {
 
   async function transact() {
     const recipient = Principal.fromText("rrkah-fqaaa-aaaaa-aaaaq-cai");
-    const amountToTransfer = Number(1);
+    const amountToTransfer = Number(0);
 
     //Live Network
     // const authClient = await AuthClient.create();
@@ -48,7 +48,7 @@ function Log(props) {
     <div className="log">
       <h1>{props.title}</h1>
 
-      {props.content.length > 100 ? (
+      {props.content.length > 300 ? (
         isExpanded ? (
           <p>
             {props.content}{" "}
@@ -58,7 +58,7 @@ function Log(props) {
           </p>
         ) : (
           <p>
-            {props.content.substring(0, 100)}
+            {props.content.substring(0, 300)}
             <span className="readMoreLink" onClick={handleReadMoreClick}>
               ...Read More
             </span>
@@ -68,15 +68,17 @@ function Log(props) {
         <p>{props.content}</p>
       )}
 
-      <p className="time" id="time">
-        {props.time}
-      </p>
-      <p className="time" id="date">
-        {props.date}
-      </p>
+      <div className="date-time">
+        <p className="time" id="time">
+          {props.time}
+        </p>
+        <p className="time" id="date">
+          {props.date}
+        </p>
+      </div>
 
       <button
-        disabled={props.userFunds > 500 ? false : true}
+        disabled={props.userFunds > 5 ? false : true}
         onClick={handleDeleteClick}
       >
         <DeleteIcon />
