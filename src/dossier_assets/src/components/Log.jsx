@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { dossier } from "../../../declarations/dossier";
-import { Principal } from "@dfinity/principal";
+import {
+  dossier,
+  // canisterId,
+  // createActor,
+} from "../../../declarations/dossier";
+// import { AuthClient } from "@dfinity/auth-client";
 
 function Log(props) {
   const [isExpanded, setExpanded] = useState(false);
+  const [logDeletionFee, setLogDeletionFee] = useState(0);
+
+  async function getLogDeletionFee() {
+    const fee = await dossier.getDeleteLogFee();
+    setLogDeletionFee(parseInt(fee.toLocaleString()));
+  }
+  getLogDeletionFee();
 
   async function transact() {
-    const recipient = Principal.fromText("rrkah-fqaaa-aaaaa-aaaaq-cai");
-    const amountToTransfer = Number(0);
-
-    //Live Network
+    // // Live Network
     // const authClient = await AuthClient.create();
     // const identity = await authClient.getIdentity();
 
@@ -20,15 +28,12 @@ function Log(props) {
     //   },
     // });
 
-    // const result = await authenticatedCanister.transfer(
-    //   recipient,
-    //   amountToTransfer
-    // );
+    // const result = await authenticatedCanister.deductDeletionFee();
 
     //Local Network
-    const result = await dossier.transfer(recipient, amountToTransfer);
+    const result = await dossier.deductDeletionFee();
+
     console.log(result);
-    //
   }
 
   function handleDeleteClick() {
@@ -78,7 +83,7 @@ function Log(props) {
       </div>
 
       <button
-        disabled={props.userFunds > 5 ? false : true}
+        disabled={props.userFunds > logDeletionFee ? false : true}
         onClick={handleDeleteClick}
       >
         <DeleteIcon />

@@ -7,7 +7,7 @@ import {
 // import { AuthClient } from "@dfinity/auth-client";
 
 function Faucet(props) {
-  const initialMessage = "Claim 500 DOSS Token to " + props.userPrincipal;
+  const initialMessage = "Claim Tokens to " + props.userPrincipal;
   const [isDisabled, setDisabled] = useState(false);
   const [messageText, setMessageText] = useState(initialMessage);
 
@@ -28,7 +28,6 @@ function Faucet(props) {
 
     // Local Network
     const result = await dossier.payOut();
-    //
 
     setMessageText(result);
   }
@@ -46,7 +45,7 @@ function Faucet(props) {
         id="btn-payout"
         onClick={handleClick}
       >
-        Get DOSS
+        Get {props.tokenSymbol}
       </button>
     </div>
   );

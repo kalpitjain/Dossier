@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import CreateIcon from "@mui/icons-material/Create";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
-import { dossier } from "../../../declarations/dossier";
-import { Principal } from "@dfinity/principal";
+import {
+  dossier,
+  // canisterId,
+  // createActor,
+} from "../../../declarations/dossier";
+// import { AuthClient } from "@dfinity/auth-client";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
+  const [logCreationFee, setLogCreationFee] = useState("");
 
   const time = new Date().toLocaleTimeString();
   const date = new Date().toISOString().split("T")[0];
@@ -32,11 +37,14 @@ function CreateArea(props) {
     });
   }
 
-  async function transact() {
-    const recipient = Principal.fromText("rrkah-fqaaa-aaaaa-aaaaq-cai");
-    const amountToTransfer = Number(0);
+  async function getLogCreationFee() {
+    const fee = await dossier.getCreateLogFee();
+    setLogCreationFee(parseInt(fee.toLocaleString()));
+  }
+  getLogCreationFee();
 
-    //Live Network
+  async function transact() {
+    // // Live Network
     // const authClient = await AuthClient.create();
     // const identity = await authClient.getIdentity();
 
@@ -46,15 +54,11 @@ function CreateArea(props) {
     //   },
     // });
 
-    // const result = await authenticatedCanister.transfer(
-    //   recipient,
-    //   amountToTransfer
-    // );
+    // const result = await authenticatedCanister.deductCreationFee();
 
     //Local Network
-    const result = await dossier.transfer(recipient, amountToTransfer);
+    const result = await dossier.deductCreationFee();
     console.log(result);
-    //
   }
 
   function submitLog(event) {
@@ -90,14 +94,12 @@ function CreateArea(props) {
           name="content"
           value={log.content}
           placeholder={
-            props.userFunds > 5
-              ? isExpanded
-                ? " Create a Log..."
-                : "Create a Log for 5 DOSS "
+            props.userFunds > logCreationFee
+              ? " Make a Log..."
               : "! Insufficient Funds !"
           }
           rows={isExpanded ? 3 : 1}
-          disabled={props.userFunds > 5 ? false : true}
+          disabled={props.userFunds > logCreationFee ? false : true}
           onClick={expand}
           onChange={handleChange}
         />
@@ -106,7 +108,6 @@ function CreateArea(props) {
             <CreateIcon />
           </Fab>
         </Zoom>
-        <p hidden={isExpanded ? false : true}>Create a Log for 5 DOSS</p>
       </form>
     </div>
   );

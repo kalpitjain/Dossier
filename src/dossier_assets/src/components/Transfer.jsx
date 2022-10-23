@@ -18,7 +18,7 @@ function Transfer() {
     const recipient = Principal.fromText(recipientId);
     const amountToTransfer = Number(amount);
 
-    //Live Network
+    // // Live Network
     // const authClient = await AuthClient.create();
     // const identity = await authClient.getIdentity();
 
@@ -33,9 +33,8 @@ function Transfer() {
     //   amountToTransfer
     // );
 
-    //Local Network
+    // Local Network
     const result = await dossier.transfer(recipient, amountToTransfer);
-    //
 
     setMessageText(result + " !");
     setAmount("");

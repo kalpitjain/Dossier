@@ -9,16 +9,17 @@ import { Principal } from "@dfinity/principal";
 function Dossier(props) {
   const [logs, setLogs] = useState([]);
   const [balanceResult, setBalanceResult] = useState("0");
+  const [tokenSymbol, setTokenSymbol] = useState("");
 
-  async function getBalance() {
+  async function getData() {
     const balance = await dossier.balanceOf(
       Principal.fromText(props.loggedInPrincipal)
     );
-
+    setTokenSymbol(await dossier.getSymbol());
     setBalanceResult(balance.toLocaleString());
   }
 
-  getBalance();
+  getData();
 
   function addLog(newLog) {
     setLogs((prevLogs) => {
@@ -50,11 +51,13 @@ function Dossier(props) {
       <DossierHeader
         userPrincipal={props.loggedInPrincipal}
         userFunds={balanceResult}
+        tokenSymbol={tokenSymbol}
       />
       <CreateArea
         onAdd={addLog}
         userPrincipal={props.loggedInPrincipal}
         userFunds={balanceResult}
+        tokenSymbol={tokenSymbol}
       />
       {logs.map((logItem, index) => {
         return (

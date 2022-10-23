@@ -9,7 +9,9 @@ function DossierFinanceHeader(props) {
           <h1 className="dossierFinance-heading">Dossier Finance</h1>
         </Link>
         <h6>Connected Account: {props.userPrincipal}</h6>
-        <h6>Funds: {props.userFunds} DOSS</h6>
+        <h6>
+          Funds: {props.userFunds} {props.tokenSymbol}
+        </h6>
       </div>
     </nav>
   );

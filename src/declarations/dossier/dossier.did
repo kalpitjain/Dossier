@@ -8,6 +8,10 @@ type Log =
 service : {
   balanceOf: (principal) -> (nat) query;
   createLog: (text, text, text, text) -> () oneway;
+  deductCreationFee: () -> (text);
+  deductDeletionFee: () -> (text);
+  getCreateLogFee: () -> (nat) query;
+  getDeleteLogFee: () -> (nat) query;
   getSymbol: () -> (text) query;
   payOut: () -> (text);
   readLogs: () -> (vec Log) query;

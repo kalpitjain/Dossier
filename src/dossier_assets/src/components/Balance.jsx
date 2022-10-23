@@ -2,17 +2,15 @@ import React, { useState } from "react";
 import { Principal } from "@dfinity/principal";
 import { dossier } from "../../../declarations/dossier";
 
-function Balance() {
+function Balance(props) {
   const [inputValue, setInputValue] = useState("");
   const [balanceResult, setBalanceResult] = useState("");
-  const [tokenSymbol, setTokenSymbol] = useState("");
   const [isHidden, setHidden] = useState(true);
 
   async function handleClick() {
     const principal = Principal.fromText(inputValue);
     const balance = await dossier.balanceOf(principal);
     setBalanceResult(balance.toLocaleString());
-    setTokenSymbol(await dossier.getSymbol());
     setHidden(false);
     setInputValue("");
   }
@@ -34,7 +32,7 @@ function Balance() {
         Check Balance
       </button>
       <h6 hidden={isHidden}>
-        This account has a balance of {balanceResult} {tokenSymbol}.
+        This account has a balance of {balanceResult} {props.tokenSymbol}.
       </h6>
     </div>
   );
