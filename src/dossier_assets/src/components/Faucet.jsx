@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {
-  dossier,
-  // canisterId,
-  // createActor,
+  // dossier,
+  canisterId,
+  createActor,
 } from "../../../declarations/dossier";
-// import { AuthClient } from "@dfinity/auth-client";
+import { AuthClient } from "@dfinity/auth-client";
 
 function Faucet(props) {
   const initialMessage = "Claim Tokens to " + props.userPrincipal;
@@ -14,20 +14,20 @@ function Faucet(props) {
   async function handleClick(event) {
     setDisabled(true);
 
-    // // Live Network
-    // const authClient = await AuthClient.create();
-    // const identity = await authClient.getIdentity();
+    // Live Network
+    const authClient = await AuthClient.create();
+    const identity = await authClient.getIdentity();
 
-    // const authenticatedCanister = createActor(canisterId, {
-    //   agentOptions: {
-    //     identity,
-    //   },
-    // });
+    const authenticatedCanister = createActor(canisterId, {
+      agentOptions: {
+        identity,
+      },
+    });
 
-    // const result = await authenticatedCanister.payOut();
+    const result = await authenticatedCanister.payOut();
 
-    // Local Network
-    const result = await dossier.payOut();
+    // // Local Network
+    // const result = await dossier.payOut();
 
     setMessageText(result);
   }

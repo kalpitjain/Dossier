@@ -12,7 +12,9 @@ actor dossier{
   let totalSupply: Nat = 1000000000000;
   let symbol: Text = "DOSS";
   let ownerPrincipal: Text = "4sgdh-3mrsd-3k7t6-2wche-fz6k5-nyjwg-lna6q-o4wz2-qvtuv-heoml-iqe";
-  let faucetPrincipal: Text = "rrkah-fqaaa-aaaaa-aaaaq-cai";
+  let faucetPrincipal: Text = "2hty3-pqaaa-aaaal-qbemq-cai";
+  // Live Canister ID - 2hty3-pqaaa-aaaal-qbemq-cai
+  // Local Canister ID - rrkah-fqaaa-aaaaa-aaaaq-cai
   let giveAmount = 5000;
   let createLogFee: Nat = 5;
   let deleteLogFee: Nat = 1;

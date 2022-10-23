@@ -4,10 +4,10 @@ import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
 import {
   dossier,
-  // canisterId,
-  // createActor,
+  canisterId,
+  createActor,
 } from "../../../declarations/dossier";
-// import { AuthClient } from "@dfinity/auth-client";
+import { AuthClient } from "@dfinity/auth-client";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
@@ -44,20 +44,20 @@ function CreateArea(props) {
   getLogCreationFee();
 
   async function transact() {
-    // // Live Network
-    // const authClient = await AuthClient.create();
-    // const identity = await authClient.getIdentity();
+    // Live Network
+    const authClient = await AuthClient.create();
+    const identity = await authClient.getIdentity();
 
-    // const authenticatedCanister = createActor(canisterId, {
-    //   agentOptions: {
-    //     identity,
-    //   },
-    // });
+    const authenticatedCanister = createActor(canisterId, {
+      agentOptions: {
+        identity,
+      },
+    });
 
-    // const result = await authenticatedCanister.deductCreationFee();
+    const result = await authenticatedCanister.deductCreationFee();
 
-    //Local Network
-    const result = await dossier.deductCreationFee();
+    // //Local Network
+    // const result = await dossier.deductCreationFee();
     console.log(result);
   }
 

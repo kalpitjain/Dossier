@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   dossier,
-  // canisterId,
-  // createActor,
+  canisterId,
+  createActor,
 } from "../../../declarations/dossier";
-// import { AuthClient } from "@dfinity/auth-client";
+import { AuthClient } from "@dfinity/auth-client";
 
 function Log(props) {
   const [isExpanded, setExpanded] = useState(false);
@@ -18,20 +18,20 @@ function Log(props) {
   getLogDeletionFee();
 
   async function transact() {
-    // // Live Network
-    // const authClient = await AuthClient.create();
-    // const identity = await authClient.getIdentity();
+    // Live Network
+    const authClient = await AuthClient.create();
+    const identity = await authClient.getIdentity();
 
-    // const authenticatedCanister = createActor(canisterId, {
-    //   agentOptions: {
-    //     identity,
-    //   },
-    // });
+    const authenticatedCanister = createActor(canisterId, {
+      agentOptions: {
+        identity,
+      },
+    });
 
-    // const result = await authenticatedCanister.deductDeletionFee();
+    const result = await authenticatedCanister.deductDeletionFee();
 
-    //Local Network
-    const result = await dossier.deductDeletionFee();
+    // //Local Network
+    // const result = await dossier.deductDeletionFee();
 
     console.log(result);
   }
