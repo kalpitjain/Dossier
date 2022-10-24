@@ -18,7 +18,6 @@ function Dossier(props) {
     setTokenSymbol(await dossier.getSymbol());
     setBalanceResult(balance.toLocaleString());
   }
-
   getData();
 
   function addLog(newLog) {

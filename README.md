@@ -133,7 +133,7 @@ echo $LIVE_CANISTER_KEY
 5. Transfer some tokens to the live canister:
 
 ```
-sudo dfx canister --network ic call dossier transfer "($LIVE_CANISTER_KEY, 50_000_000)"
+sudo dfx canister --network ic call dossier transfer "($LIVE_CANISTER_KEY, 500_000_000_000)"
 ```
 
 6. Get live canister front-end id:

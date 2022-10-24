@@ -79,7 +79,7 @@ form.create-log button {
   z-index: 0;
 }
 
-form.create-log p {
+.message {
   margin-bottom: 0rem;
   opacity: 50%;
 }

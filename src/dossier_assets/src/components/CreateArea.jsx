@@ -12,6 +12,15 @@ import { AuthClient } from "@dfinity/auth-client";
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
   const [logCreationFee, setLogCreationFee] = useState("");
+  const [disabled, setDisabled] = useState(false);
+  const [isHidden, setHidden] = useState(true);
+  const [message, setmessage] = useState();
+
+  async function getLogCreationFee() {
+    const fee = await dossier.getCreateLogFee();
+    setLogCreationFee(parseInt(fee.toLocaleString()));
+  }
+  getLogCreationFee();
 
   const time = new Date().toLocaleTimeString();
   const date = new Date().toISOString().split("T")[0];
@@ -37,13 +46,8 @@ function CreateArea(props) {
     });
   }
 
-  async function getLogCreationFee() {
-    const fee = await dossier.getCreateLogFee();
-    setLogCreationFee(parseInt(fee.toLocaleString()));
-  }
-  getLogCreationFee();
-
-  async function transact() {
+  async function submitLog(event) {
+    setDisabled(true);
     // Live Network
     const authClient = await AuthClient.create();
     const identity = await authClient.getIdentity();
@@ -53,23 +57,20 @@ function CreateArea(props) {
         identity,
       },
     });
+    const result = await authenticatedCanister.deductCreateLogFee();
 
-    const result = await authenticatedCanister.deductCreationFee();
-
-    // //Local Network
-    // const result = await dossier.deductCreationFee();
-    console.log(result);
-  }
-
-  function submitLog(event) {
-    transact();
-    props.onAdd(log);
+    if (result === "! Success !") {
+      props.onAdd(log);
+    }
     setLog({
       title: "",
       content: "",
       time: time,
       date: date,
     });
+    setHidden(false);
+    setmessage(result);
+    setDisabled(false);
     setExpanded(false);
     event.preventDefault();
   }
@@ -93,21 +94,22 @@ function CreateArea(props) {
         <textarea
           name="content"
           value={log.content}
-          placeholder={
-            props.userFunds > logCreationFee
-              ? " Make a Log..."
-              : "! Insufficient Funds !"
-          }
+          placeholder="Make a Log..."
           rows={isExpanded ? 3 : 1}
-          disabled={props.userFunds > logCreationFee ? false : true}
           onClick={expand}
           onChange={handleChange}
         />
         <Zoom in={isExpanded}>
-          <Fab onClick={submitLog}>
+          <Fab disabled={disabled} onClick={submitLog}>
             <CreateIcon />
           </Fab>
         </Zoom>
+        <p className="message" hidden={!isHidden}>
+          Make a Log For {logCreationFee} {props.tokenSymbol}
+        </p>
+        <p className="message" hidden={isHidden}>
+          {message}
+        </p>
       </form>
     </div>
   );

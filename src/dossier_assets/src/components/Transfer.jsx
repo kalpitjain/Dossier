@@ -36,7 +36,7 @@ function Transfer() {
     // // Local Network
     // const result = await dossier.transfer(recipient, amountToTransfer);
 
-    setMessageText(result + " !");
+    setMessageText(result);
     setAmount("");
     setRecipientId("");
     setDisabled(false);

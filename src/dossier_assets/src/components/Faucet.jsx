@@ -37,7 +37,7 @@ function Faucet(props) {
       <h1 className="dossierFinance-heading">Faucet</h1>
 
       <h6>Get your free Dossier tokens here !</h6>
-      <h6>{messageText} !</h6>
+      <h6>{messageText}</h6>
 
       <button
         disabled={isDisabled}
