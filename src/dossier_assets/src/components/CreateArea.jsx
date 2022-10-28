@@ -91,6 +91,7 @@ function CreateArea(props) {
             onChange={handleChange}
             value={log.title}
             placeholder="Title"
+            spellCheck="false"
             required
           />
         )}
@@ -102,6 +103,7 @@ function CreateArea(props) {
           rows={isExpanded ? 3 : 1}
           onClick={expand}
           onChange={handleChange}
+          spellCheck="false"
           required
         />
         <Zoom in={isExpanded}>
