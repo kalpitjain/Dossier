@@ -4,10 +4,10 @@ import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
 import {
   dossier,
-  canisterId,
-  createActor,
+  // canisterId,
+  // createActor,
 } from "../../../declarations/dossier";
-import { AuthClient } from "@dfinity/auth-client";
+// import { AuthClient } from "@dfinity/auth-client";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
@@ -48,16 +48,19 @@ function CreateArea(props) {
 
   async function submitLog(event) {
     setDisabled(true);
-    // Live Network
-    const authClient = await AuthClient.create();
-    const identity = await authClient.getIdentity();
+    // // Live Network
+    // const authClient = await AuthClient.create();
+    // const identity = await authClient.getIdentity();
 
-    const authenticatedCanister = createActor(canisterId, {
-      agentOptions: {
-        identity,
-      },
-    });
-    const result = await authenticatedCanister.deductCreateLogFee();
+    // const authenticatedCanister = createActor(canisterId, {
+    //   agentOptions: {
+    //     identity,
+    //   },
+    // });
+    // const result = await authenticatedCanister.deductCreateLogFee();
+
+    // Local Network
+    const result = await dossier.deductCreateLogFee();
 
     if (result === "! Success !") {
       props.onAdd(log);
@@ -88,6 +91,7 @@ function CreateArea(props) {
             onChange={handleChange}
             value={log.title}
             placeholder="Title"
+            required
           />
         )}
 
@@ -98,6 +102,7 @@ function CreateArea(props) {
           rows={isExpanded ? 3 : 1}
           onClick={expand}
           onChange={handleChange}
+          required
         />
         <Zoom in={isExpanded}>
           <Fab disabled={disabled} onClick={submitLog}>
@@ -105,7 +110,7 @@ function CreateArea(props) {
           </Fab>
         </Zoom>
         <p className="message" hidden={!isHidden}>
-          Make a Log For {logCreationFee} {props.tokenSymbol}
+          {logCreationFee} {props.tokenSymbol}
         </p>
         <p className="message" hidden={isHidden}>
           {message}

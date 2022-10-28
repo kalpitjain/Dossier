@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import DossierHeader from "../components/DossierHeader";
-import DossierFooter from "../components/DossierFooter";
+import Header from "../components/Header";
 import Log from "../components/Log";
 import CreateArea from "../components/CreateArea";
 import { dossier } from "../../../declarations/dossier";
@@ -47,10 +46,12 @@ function Dossier(props) {
 
   return (
     <div>
-      <DossierHeader
+      <Header
+        heading={"Dossier"}
         userPrincipal={props.loggedInPrincipal}
         userFunds={balanceResult}
         tokenSymbol={tokenSymbol}
+        headingRedirectLink={"/DossierFinance"}
       />
       <CreateArea
         onAdd={addLog}
@@ -59,21 +60,68 @@ function Dossier(props) {
         tokenSymbol={tokenSymbol}
       />
       {logs.map((logItem, index) => {
-        return (
-          <Log
-            key={index}
-            id={index}
-            title={logItem.title}
-            content={logItem.content}
-            time={logItem.time}
-            date={logItem.date}
-            onDelete={deleteLog}
-            userPrincipal={props.loggedInPrincipal}
-            userFunds={balanceResult}
-          />
-        );
+        if (index % 4 === 0) {
+          return (
+            <Log
+              key={index}
+              id={index}
+              title={logItem.title}
+              content={logItem.content}
+              time={logItem.time}
+              date={logItem.date}
+              onDelete={deleteLog}
+              userPrincipal={props.loggedInPrincipal}
+              userFunds={balanceResult}
+              backgroundColour={"#ff7c65"}
+            />
+          );
+        } else if (index % 4 === 1) {
+          return (
+            <Log
+              key={index}
+              id={index}
+              title={logItem.title}
+              content={logItem.content}
+              time={logItem.time}
+              date={logItem.date}
+              onDelete={deleteLog}
+              userPrincipal={props.loggedInPrincipal}
+              userFunds={balanceResult}
+              backgroundColour={"#ffe065"}
+            />
+          );
+        } else if (index % 4 === 2) {
+          return (
+            <Log
+              key={index}
+              id={index}
+              title={logItem.title}
+              content={logItem.content}
+              time={logItem.time}
+              date={logItem.date}
+              onDelete={deleteLog}
+              userPrincipal={props.loggedInPrincipal}
+              userFunds={balanceResult}
+              backgroundColour={"#84ff79"}
+            />
+          );
+        } else {
+          return (
+            <Log
+              key={index}
+              id={index}
+              title={logItem.title}
+              content={logItem.content}
+              time={logItem.time}
+              date={logItem.date}
+              onDelete={deleteLog}
+              userPrincipal={props.loggedInPrincipal}
+              userFunds={balanceResult}
+              backgroundColour={"#94d1ff"}
+            />
+          );
+        }
       })}
-      <DossierFooter />
     </div>
   );
 }

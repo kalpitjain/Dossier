@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import DossierFinanceHeader from "../components/DossierFinanceHeader";
+import Header from "../components/Header";
 import Faucet from "../components/Faucet";
 import Balance from "../components/Balance";
 import Transfer from "../components/Transfer";
-import DossierFinanceFooter from "../components/DossierFinanceFooter";
 import { dossier } from "../../../declarations/dossier";
 import { Principal } from "@dfinity/principal";
 
@@ -22,27 +21,28 @@ function DossierFinance(props) {
   getData();
 
   return (
-    <div className="container-fluid dossierFinance-body" id="screen">
-      <DossierFinanceHeader
+    <div className="container-fluid" id="screen">
+      <Header
+        heading={"Dossier Finance"}
         userPrincipal={props.loggedInPrincipal}
         userFunds={balanceResult}
         tokenSymbol={tokenSymbol}
+        headingRedirectLink={"/"}
       />
       <div className="row">
-        <div className="col-lg-6 set-border">
+        <div className="col-lg-12 set-border">
           <Faucet
             userPrincipal={props.loggedInPrincipal}
             tokenSymbol={tokenSymbol}
           />
         </div>
-        <div className="col-lg-6 set-border">
+        <div className="col-lg-12 set-border">
           <Balance tokenSymbol={tokenSymbol} />
         </div>
-        <div className="col set-border">
+        <div className="col-lg-12 set-border">
           <Transfer />
         </div>
       </div>
-      <DossierFinanceFooter />
     </div>
   );
 }

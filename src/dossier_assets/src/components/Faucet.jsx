@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {
-  // dossier,
-  canisterId,
-  createActor,
+  dossier,
+  // canisterId,
+  // createActor,
 } from "../../../declarations/dossier";
-import { AuthClient } from "@dfinity/auth-client";
+// import { AuthClient } from "@dfinity/auth-client";
 
 function Faucet(props) {
   const initialMessage = "Claim Tokens to " + props.userPrincipal;
@@ -14,34 +14,32 @@ function Faucet(props) {
   async function handleClick(event) {
     setDisabled(true);
 
-    // Live Network
-    const authClient = await AuthClient.create();
-    const identity = await authClient.getIdentity();
+    // // Live Network
+    // const authClient = await AuthClient.create();
+    // const identity = await authClient.getIdentity();
 
-    const authenticatedCanister = createActor(canisterId, {
-      agentOptions: {
-        identity,
-      },
-    });
+    // const authenticatedCanister = createActor(canisterId, {
+    //   agentOptions: {
+    //     identity,
+    //   },
+    // });
+    // const result = await authenticatedCanister.payOut();
 
-    const result = await authenticatedCanister.payOut();
-
-    // // Local Network
-    // const result = await dossier.payOut();
-
+    // Local Network
+    const result = await dossier.payOut();
     setMessageText(result);
   }
 
   return (
-    <div className="faucet">
-      <h1 className="dossierFinance-heading">Faucet</h1>
+    <div className="faucet blocks">
+      <h1 className="dossierFinanceBlockHeading">Faucet</h1>
 
       <h6>Get your free Dossier tokens here !</h6>
       <h6>{messageText}</h6>
 
       <button
         disabled={isDisabled}
-        className="trade-buttons btn"
+        className="btn btn-dark"
         id="btn-payout"
         onClick={handleClick}
       >

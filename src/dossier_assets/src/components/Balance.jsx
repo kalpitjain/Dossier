@@ -16,19 +16,24 @@ function Balance(props) {
   }
 
   return (
-    <div className="balance">
-      <h1 className="dossierFinance-heading">Check Token Balance</h1>
+    <div className="balance blocks">
+      <h1 className="dossierFinanceBlockHeading">Check Token Balance</h1>
       <input
         id="balance-principal-id"
         type="text"
         placeholder="  Enter Principal ID"
+        required
         spellCheck="false"
         value={inputValue}
         onChange={(e) => {
           setInputValue(e.target.value);
         }}
       />
-      <button className="btn" id="btn-request-balance" onClick={handleClick}>
+      <button
+        className="btn btn-dark"
+        id="btn-request-balance"
+        onClick={handleClick}
+      >
         Check Balance
       </button>
       <h6 hidden={isHidden}>

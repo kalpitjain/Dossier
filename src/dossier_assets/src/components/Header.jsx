@@ -3,19 +3,22 @@ import { Link } from "react-router-dom";
 
 function DossierHeader(props) {
   return (
-    <nav className="navbar header dossier-header">
+    <nav className="navbar header">
       <div className="container-fluid">
         <Link
-          to="/DossierFinance"
+          to={props.headingRedirectLink}
           style={{ textDecoration: "none", color: "inherit" }}
         >
-          <h1>Dossier</h1>
+          <h1>{props.heading}</h1>
         </Link>
-
-        <h6>Connected Account: {props.userPrincipal}</h6>
+        {/* <Link
+          to={props.headingRedirectLink}
+          style={{ textDecoration: "none", color: "inherit" }}
+        > */}
         <h6>
           Funds: {props.userFunds} {props.tokenSymbol}
         </h6>
+        {/* </Link> */}
       </div>
     </nav>
   );

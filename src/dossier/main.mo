@@ -10,7 +10,7 @@ actor dossier{
   // Tokenomics and Token Details ( All Hard Coded Values )
   let totalSupply: Nat = 1000000000000;
   let symbol: Text = "DOSS";
-  let ownerPrincipal: Text = "4sgdh-3mrsd-3k7t6-2wche-fz6k5-nyjwg-lna6q-o4wz2-qvtuv-heoml-iqe";
+  let foundationPrincipal: Text = "4sgdh-3mrsd-3k7t6-2wche-fz6k5-nyjwg-lna6q-o4wz2-qvtuv-heoml-iqe";
   let faucetPrincipal: Text = "vuuo7-hyaaa-aaaal-qbfja-cai";
   // Live Canister ID - vuuo7-hyaaa-aaaal-qbfja-cai
   // Live Canister Frontend ID - vtvil-kaaaa-aaaal-qbfjq-cai
@@ -21,7 +21,7 @@ actor dossier{
   let deleteLogFee: Nat = 1;
 
   // Owner Principal
-  let owner : Principal = Principal.fromText(ownerPrincipal);
+  let foundation : Principal = Principal.fromText(foundationPrincipal);
   
   // Faucet Principal 
   let faucet : Principal = Principal.fromText(faucetPrincipal);
@@ -30,7 +30,12 @@ actor dossier{
   private var balances = HashMap.HashMap<Principal, Nat>(1, Principal.equal, Principal.hash);
   
   if(balances.size() < 1){
-    balances.put(owner, totalSupply);
+    balances.put(foundation, totalSupply);
+  };
+
+  // Get Token Symbol
+  public query func getSymbol(): async Text{
+    return symbol;
   };
 
   // Get Log Creation Fee
@@ -41,11 +46,6 @@ actor dossier{
   // Get Log Deletion Fee
   public query func getDeleteLogFee(): async Nat{
     return deleteLogFee;
-  };
-
-  // Get Token Symbol
-  public query func getSymbol(): async Text{
-    return symbol;
   };
 
   // Dossier Finance
@@ -71,15 +71,15 @@ actor dossier{
   
   //Transfer Block
 
-  public shared(msg) func transfer(to: Principal, amount: Nat): async Text{
-    let fromBalance = await balanceOf(msg.caller);
-    if(fromBalance>=amount){
-      let newFromBalance: Nat = fromBalance - amount;
-      balances.put(msg.caller, newFromBalance);
+  public shared(msg) func transfer(reciever: Principal, amount: Nat): async Text{
+    let senderBalance = await balanceOf(msg.caller);
+    if(senderBalance>=amount){
+      let newSenderBalance: Nat = senderBalance - amount;
+      balances.put(msg.caller, newSenderBalance);
 
-      let toBalance = await balanceOf(to);
-      let newToBalance = toBalance + amount;
-      balances.put(to, newToBalance);
+      let recieverBalance = await balanceOf(reciever);
+      let newrecieverBalance = recieverBalance + amount;
+      balances.put(reciever, newrecieverBalance);
       
       return "! Success !";
     }else{
@@ -147,11 +147,9 @@ actor dossier{
 
   // Delete Log
   public func removeLog(id: Nat){
-
       let listFront = List.take(logs, id);
       let listBack = List.drop(logs, id+1);
       logs := List.append(listFront, listBack);
-
   };
 
   system func preupgrade(){
@@ -161,7 +159,7 @@ actor dossier{
   system func postupgrade(){
     balances:= HashMap.fromIter<Principal, Nat>(balanceEntries.vals(), 1, Principal.equal, Principal.hash);
     if(balances.size() < 1){
-      balances.put(owner, totalSupply);
+      balances.put(foundation, totalSupply);
     };
   };
 
