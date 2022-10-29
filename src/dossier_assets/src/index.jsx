@@ -16,7 +16,6 @@ const init = async () => {
       identityProvider: "https://identity.ic0.app/#authorize",
       onSuccess: () => {
         handleAuthenticated(authClient);
-        window.location.reload();
       },
     });
   }

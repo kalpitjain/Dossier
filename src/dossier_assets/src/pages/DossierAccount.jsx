@@ -90,7 +90,7 @@ function Dossier(props) {
           amount={"+5000"}
           date={"2022-10-28"}
           time={"10:38:10"}
-          backgroundColour={"#72ee72"}
+          backgroundColour={"#72ee72;"}
         />
         <ActivityLog
           activity={"Balance Checked"}
