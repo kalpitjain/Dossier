@@ -28,6 +28,7 @@ function DossierFinance(props) {
         userFunds={balanceResult}
         tokenSymbol={tokenSymbol}
         headingRedirectLink={"/"}
+        accountRedirectLink={"/DossierAccount"}
       />
       <div className="row">
         <div className="col-lg-12 set-border">
@@ -37,10 +38,13 @@ function DossierFinance(props) {
           />
         </div>
         <div className="col-lg-12 set-border">
-          <Balance tokenSymbol={tokenSymbol} />
+          <Balance
+            userPrincipal={props.loggedInPrincipal}
+            tokenSymbol={tokenSymbol}
+          />
         </div>
         <div className="col-lg-12 set-border">
-          <Transfer />
+          <Transfer userPrincipal={props.loggedInPrincipal} />
         </div>
       </div>
     </div>

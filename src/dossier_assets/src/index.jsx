@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dossier from "./pages/Dossier";
 import DossierFinance from "./pages/DossierFinance";
+import DossierAccount from "./pages/DossierAccount";
 import { AuthClient } from "@dfinity/auth-client";
 
 const init = async () => {
@@ -30,11 +31,17 @@ async function handleAuthenticated(authClient) {
       <Routes>
         <Route
           path="/"
+          // path="/Dossier"
           element={<Dossier loggedInPrincipal={userPrincipal} />}
         />
         <Route
           path="/DossierFinance"
           element={<DossierFinance loggedInPrincipal={userPrincipal} />}
+        />
+        <Route
+          path="/DossierAccount"
+          // path="/"
+          element={<DossierAccount loggedInPrincipal={userPrincipal} />}
         />
       </Routes>
     </Router>

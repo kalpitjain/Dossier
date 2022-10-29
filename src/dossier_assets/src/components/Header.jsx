@@ -11,9 +11,14 @@ function DossierHeader(props) {
         >
           <h1>{props.heading}</h1>
         </Link>
-        <h6>
-          Funds: {props.userFunds} {props.tokenSymbol}
-        </h6>
+        <Link
+          to={props.accountRedirectLink}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <h6>
+            Funds: {props.userFunds} {props.tokenSymbol}
+          </h6>
+        </Link>
       </div>
     </nav>
   );

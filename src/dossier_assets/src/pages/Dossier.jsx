@@ -52,6 +52,7 @@ function Dossier(props) {
         userFunds={balanceResult}
         tokenSymbol={tokenSymbol}
         headingRedirectLink={"/DossierFinance"}
+        accountRedirectLink={"/DossierAccount"}
       />
       <CreateArea
         onAdd={addLog}
@@ -102,7 +103,7 @@ function Dossier(props) {
               onDelete={deleteLog}
               userPrincipal={props.loggedInPrincipal}
               userFunds={balanceResult}
-              backgroundColour={"#84ff79"}
+              backgroundColour={"#72ee72"}
             />
           );
         } else {
