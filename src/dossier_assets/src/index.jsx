@@ -11,11 +11,13 @@ const init = async () => {
 
   if (await authClient.isAuthenticated()) {
     handleAuthenticated(authClient);
+    // window.location.reload();
   } else {
     await authClient.login({
       identityProvider: "https://identity.ic0.app/#authorize",
       onSuccess: () => {
         handleAuthenticated(authClient);
+        window.location.reload();
       },
     });
   }
