@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
-  // dossier,
+  dossier,
   canisterId,
   createActor,
 } from "../../../declarations/dossier";
@@ -10,6 +10,13 @@ import { AuthClient } from "@dfinity/auth-client";
 function Log(props) {
   const [isExpanded, setExpanded] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const [logDeletionFee, setLogDeletionFee] = useState("");
+
+  async function getLogDeletionFee() {
+    const fee = await dossier.getDeleteLogFee();
+    setLogDeletionFee(parseInt(fee.toLocaleString()));
+  }
+  getLogDeletionFee();
 
   async function handleDeleteClick() {
     setDisabled(true);
@@ -28,6 +35,17 @@ function Log(props) {
     console.log(result);
 
     if (result === "! Success !") {
+      //
+      const time = new Date().toLocaleTimeString();
+      const date = new Date().toISOString().split("T")[0];
+      dossier.createActivityLog(
+        props.userPrincipal,
+        "Deleted Log",
+        (-logDeletionFee).toString(),
+        time.toString(),
+        date.toString()
+      );
+      //
       props.onDelete(props.id);
     }
     setDisabled(false);

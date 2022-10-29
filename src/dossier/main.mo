@@ -48,6 +48,11 @@ actor dossier{
     return deleteLogFee;
   };
 
+  // Get Faucet Amount
+  public query func faucetAmount(): async Nat{
+    return giveAmount;
+  };
+
   // Dossier Finance
   // Balance Block
   public query func balanceOf(who: Principal): async Nat{
@@ -60,7 +65,7 @@ actor dossier{
 
   // Faucet Block
   public shared(msg) func payOut(): async Text{
-    Debug.print(debug_show(msg.caller));
+    // Debug.print(debug_show(msg.caller));
     if(balances.get(msg.caller) == null){
       let result = await transfer(msg.caller, giveAmount);
       return result;
@@ -137,7 +142,7 @@ actor dossier{
         date = dateText;
       };
       logs:= List.push(newLog, logs);
-      Debug.print(debug_show(logs));
+      // Debug.print(debug_show(logs));
   };
 
   // View Log
@@ -151,6 +156,37 @@ actor dossier{
       let listBack = List.drop(logs, id+1);
       logs := List.append(listFront, listBack);
   };
+
+  // 
+
+  public type ActivityLog = {
+    user: Text;
+    activity: Text;
+    amount: Text;
+    time: Text;
+    date: Text;
+  };
+
+  stable var activityLogs: List.List<ActivityLog> = List.nil<ActivityLog>();
+
+  public func createActivityLog(userText: Text, activityText: Text, amountText: Text, timeText: Text, dateText: Text){
+      let newActivityLog: ActivityLog = {
+        user = userText;
+        activity = activityText;
+        amount = amountText;
+        time = timeText;
+        date = dateText;
+      };
+      activityLogs:= List.push(newActivityLog, activityLogs);
+      Debug.print(debug_show(activityLogs));
+  };
+
+  // View Activity Log
+  public query func readActivityLogs(): async [ActivityLog]{
+    return List.toArray(activityLogs);
+  };
+
+  // 
 
   system func preupgrade(){
     balanceEntries:= Iter.toArray(balances.entries());

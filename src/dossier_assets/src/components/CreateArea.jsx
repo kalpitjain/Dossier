@@ -63,6 +63,15 @@ function CreateArea(props) {
     // const result = await dossier.deductCreateLogFee();
 
     if (result === "! Success !") {
+      //
+      dossier.createActivityLog(
+        props.userPrincipal,
+        "Created Log",
+        (-logCreationFee).toString(),
+        time.toString(),
+        date.toString()
+      );
+      //
       props.onAdd(log);
     }
     setLog({

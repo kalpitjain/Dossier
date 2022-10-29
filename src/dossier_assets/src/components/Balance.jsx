@@ -10,6 +10,18 @@ function Balance(props) {
   async function handleClick() {
     const principal = Principal.fromText(inputValue);
     const balance = await dossier.balanceOf(principal);
+
+    //
+    const time = new Date().toLocaleTimeString();
+    const date = new Date().toISOString().split("T")[0];
+    dossier.createActivityLog(
+      props.userPrincipal,
+      "Checked Balance",
+      "0",
+      time.toString(),
+      date.toString()
+    );
+    //
     setBalanceResult(balance.toLocaleString());
     setHidden(false);
     setInputValue("");

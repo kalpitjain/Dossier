@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  // dossier,
+  dossier,
   canisterId,
   createActor,
 } from "../../../declarations/dossier";
@@ -10,6 +10,13 @@ function Faucet(props) {
   const initialMessage = "Claim Tokens to " + props.userPrincipal;
   const [isDisabled, setDisabled] = useState(false);
   const [messageText, setMessageText] = useState(initialMessage);
+  const [amount, setAmount] = useState("");
+
+  async function getfaucetAmount() {
+    const faucetAmount = await dossier.faucetAmount();
+    setAmount(faucetAmount);
+  }
+  getfaucetAmount();
 
   async function handleClick(event) {
     setDisabled(true);
@@ -27,6 +34,32 @@ function Faucet(props) {
 
     // // Local Network
     // const result = await dossier.payOut();
+    //
+
+    if (result === "! Success !") {
+      //
+      const time = new Date().toLocaleTimeString();
+      const date = new Date().toISOString().split("T")[0];
+      dossier.createActivityLog(
+        props.userPrincipal,
+        "Faucet",
+        amount.toString(),
+        time.toString(),
+        date.toString()
+      );
+    } else {
+      const time = new Date().toLocaleTimeString();
+      const date = new Date().toISOString().split("T")[0];
+      dossier.createActivityLog(
+        props.userPrincipal,
+        "Faucet",
+        "0",
+        time.toString(),
+        date.toString()
+      );
+    }
+
+    //
     setMessageText(result);
   }
 

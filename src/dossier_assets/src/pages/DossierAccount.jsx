@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import AccountDetails from "../components/AccountDetails";
 import ActivityLogHeading from "../components/ActivityLogHeading";
@@ -21,10 +21,13 @@ function Dossier(props) {
   }
   getData();
 
-  function addActivityLog(newActivityLog) {
-    setActivityLogs((prevActivityLogs) => {
-      return [activityLogs, ...prevActivityLogs];
-    });
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    const activityLogArray = await dossier.readActivityLogs();
+    setActivityLogs(activityLogArray);
   }
 
   return (
@@ -49,77 +52,93 @@ function Dossier(props) {
         date={"Date"}
         time={"Time"}
       />
+
       <div className="scrollable">
-        <ActivityLog
-          activity={"Faucet"}
-          amount={"+5000"}
-          date={"2022-10-28"}
-          time={"10:38:10"}
-          backgroundColour={"#72ee72"}
-        />
-        <ActivityLog
-          activity={"Balance Checked"}
-          amount={"0"}
-          date={"2022-10-28"}
-          time={"10:38:10"}
-          backgroundColour={"#ffe065"}
-        />
-        <ActivityLog
-          activity={"Transferred Funds"}
-          amount={"-50"}
-          date={"2022-10-28"}
-          time={"10:38:10"}
-          backgroundColour={"#ff7c65"}
-        />
-        <ActivityLog
-          activity={"Created Log"}
-          amount={"-5"}
-          date={"2022-10-28"}
-          time={"10:38:10"}
-          backgroundColour={"#94d1ff"}
-        />
-        <ActivityLog
-          activity={"Deleted Log"}
-          amount={"-1"}
-          date={"2022-10-28"}
-          time={"10:38:10"}
-          backgroundColour={"#ffb1c4"}
-        />
-        <ActivityLog
-          activity={"Faucet"}
-          amount={"+5000"}
-          date={"2022-10-28"}
-          time={"10:38:10"}
-          backgroundColour={"#72ee72;"}
-        />
-        <ActivityLog
-          activity={"Balance Checked"}
-          amount={"0"}
-          date={"2022-10-28"}
-          time={"10:38:10"}
-          backgroundColour={"#ffe065"}
-        />
-        <ActivityLog
-          activity={"Transferred Funds"}
-          amount={"-50"}
-          date={"2022-10-28"}
-          time={"10:38:10"}
-          backgroundColour={"#ff7c65"}
-        />
-        <ActivityLog
-          activity={"Created Log"}
-          amount={"-5"}
-          date={"2022-10-28"}
-          time={"10:38:10"}
-          backgroundColour={"#94d1ff"}
-        />
-        <ActivityLog
-          activity={"Deleted Log"}
-          amount={"-1"}
-          date={"2022-10-28"}
-          time={"10:38:10"}
-          backgroundColour={"#ffb1c4"}
-        />
+        {activityLogs.map((activityLogItem, index) => {
+          if (
+            activityLogItem.user === props.loggedInPrincipal &&
+            activityLogItem.activity === "Faucet"
+          ) {
+            return (
+              <ActivityLog
+                key={index}
+                id={index}
+                activity={activityLogItem.activity}
+                amount={activityLogItem.amount}
+                date={activityLogItem.time}
+                time={activityLogItem.date}
+                userPrincipal={props.loggedInPrincipal}
+                backgroundColour={"#72ee72"}
+              />
+            );
+          } else if (
+            activityLogItem.user === props.loggedInPrincipal &&
+            activityLogItem.activity === "Checked Balance"
+          ) {
+            return (
+              <ActivityLog
+                key={index}
+                id={index}
+                activity={activityLogItem.activity}
+                amount={activityLogItem.amount}
+                date={activityLogItem.time}
+                time={activityLogItem.date}
+                userPrincipal={props.loggedInPrincipal}
+                backgroundColour={"#ffe065"}
+              />
+            );
+          } else if (
+            activityLogItem.user === props.loggedInPrincipal &&
+            activityLogItem.activity === "Transferred Funds"
+          ) {
+            return (
+              <ActivityLog
+                key={index}
+                id={index}
+                activity={activityLogItem.activity}
+                amount={activityLogItem.amount}
+                date={activityLogItem.time}
+                time={activityLogItem.date}
+                userPrincipal={props.loggedInPrincipal}
+                backgroundColour={"#ff7c65"}
+              />
+            );
+          } else if (
+            activityLogItem.user === props.loggedInPrincipal &&
+            activityLogItem.activity === "Created Log"
+          ) {
+            return (
+              <ActivityLog
+                key={index}
+                id={index}
+                activity={activityLogItem.activity}
+                amount={activityLogItem.amount}
+                date={activityLogItem.time}
+                time={activityLogItem.date}
+                userPrincipal={props.loggedInPrincipal}
+                backgroundColour={"#94d1ff"}
+              />
+            );
+          } else if (
+            activityLogItem.user === props.loggedInPrincipal &&
+            activityLogItem.activity === "Deleted Log"
+          ) {
+            return (
+              <ActivityLog
+                key={index}
+                id={index}
+                activity={activityLogItem.activity}
+                amount={activityLogItem.amount}
+                date={activityLogItem.time}
+                time={activityLogItem.date}
+                userPrincipal={props.loggedInPrincipal}
+                backgroundColour={"#ffb1c4"}
+              />
+            );
+          } else {
+            return <div></div>;
+          }
+        })}
       </div>
     </div>
   );

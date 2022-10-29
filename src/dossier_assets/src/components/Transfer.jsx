@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Principal } from "@dfinity/principal";
 import {
-  // dossier,
+  dossier,
   canisterId,
   createActor,
 } from "../../../declarations/dossier";
 import { AuthClient } from "@dfinity/auth-client";
 
-function Transfer() {
+function Transfer(props) {
   const [recipientId, setRecipientId] = useState("");
   const [amount, setAmount] = useState("");
   const [isDisabled, setDisabled] = useState(false);
@@ -17,6 +17,18 @@ function Transfer() {
     setDisabled(true);
     const recipient = Principal.fromText(recipientId);
     const amountToTransfer = Number(amount);
+
+    //
+    const time = new Date().toLocaleTimeString();
+    const date = new Date().toISOString().split("T")[0];
+    dossier.createActivityLog(
+      props.userPrincipal,
+      "Transferred Funds",
+      (-amountToTransfer).toString(),
+      time.toString(),
+      date.toString()
+    );
+    //
 
     // Live Network
     const authClient = await AuthClient.create();
@@ -33,7 +45,7 @@ function Transfer() {
       amountToTransfer
     );
 
-    // Local Network
+    // // Local Network
     // const result = await dossier.transfer(recipient, amountToTransfer);
     setMessageText(result);
     setAmount("");
