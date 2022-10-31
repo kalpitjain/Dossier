@@ -4,10 +4,10 @@ import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
 import {
   dossier,
-  canisterId,
-  createActor,
+  // canisterId,
+  // createActor,
 } from "../../../declarations/dossier";
-import { AuthClient } from "@dfinity/auth-client";
+// import { AuthClient } from "@dfinity/auth-client";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
@@ -48,22 +48,20 @@ function CreateArea(props) {
 
   async function submitLog(event) {
     setDisabled(true);
-    // Live Network
-    const authClient = await AuthClient.create();
-    const identity = await authClient.getIdentity();
+    // // Live Network
+    // const authClient = await AuthClient.create();
+    // const identity = await authClient.getIdentity();
+    // const authenticatedCanister = createActor(canisterId, {
+    //   agentOptions: {
+    //     identity,
+    //   },
+    // });
+    // const result = await authenticatedCanister.deductCreateLogFee();
 
-    const authenticatedCanister = createActor(canisterId, {
-      agentOptions: {
-        identity,
-      },
-    });
-    const result = await authenticatedCanister.deductCreateLogFee();
-
-    // // Local Network
-    // const result = await dossier.deductCreateLogFee();
+    // Local Network
+    const result = await dossier.deductCreateLogFee();
 
     if (result === "! Success !") {
-      //
       dossier.createActivityLog(
         props.userPrincipal,
         "Created Log",
@@ -71,15 +69,16 @@ function CreateArea(props) {
         time.toString(),
         date.toString()
       );
-      //
       props.onAdd(log);
     }
+
     setLog({
       title: "",
       content: "",
       time: time,
       date: date,
     });
+
     setHidden(false);
     setmessage(result);
     setDisabled(false);
@@ -115,14 +114,17 @@ function CreateArea(props) {
           spellCheck="false"
           required
         />
+
         <Zoom in={isExpanded}>
           <Fab disabled={disabled} onClick={submitLog}>
             <CreateIcon />
           </Fab>
         </Zoom>
+
         <p className="message" hidden={!isHidden}>
           {logCreationFee} {props.tokenSymbol}
         </p>
+
         <p className="message" hidden={isHidden}>
           {message}
         </p>

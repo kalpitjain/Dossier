@@ -17,7 +17,6 @@ function DossierFinance(props) {
     setTokenSymbol(await dossier.getSymbol());
     setBalanceResult(balance.toLocaleString());
   }
-
   getData();
 
   return (
@@ -30,6 +29,7 @@ function DossierFinance(props) {
         headingRedirectLink={"/"}
         accountRedirectLink={"/DossierAccount"}
       />
+
       <div className="row">
         <div className="col-lg-12 set-border">
           <Faucet
@@ -43,6 +43,7 @@ function DossierFinance(props) {
             tokenSymbol={tokenSymbol}
           />
         </div>
+
         <div className="col-lg-12 set-border">
           <Transfer userPrincipal={props.loggedInPrincipal} />
         </div>

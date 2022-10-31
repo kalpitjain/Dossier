@@ -11,7 +11,8 @@ function Balance(props) {
     const principal = Principal.fromText(inputValue);
     const balance = await dossier.balanceOf(principal);
 
-    //
+    setBalanceResult(balance.toLocaleString());
+
     const time = new Date().toLocaleTimeString();
     const date = new Date().toISOString().split("T")[0];
     dossier.createActivityLog(
@@ -21,8 +22,7 @@ function Balance(props) {
       time.toString(),
       date.toString()
     );
-    //
-    setBalanceResult(balance.toLocaleString());
+
     setHidden(false);
     setInputValue("");
   }
@@ -30,6 +30,7 @@ function Balance(props) {
   return (
     <div className="balance blocks">
       <h1 className="dossierFinanceBlockHeading">Check Token Balance</h1>
+
       <input
         id="balance-principal-id"
         type="text"
@@ -41,6 +42,7 @@ function Balance(props) {
           setInputValue(e.target.value);
         }}
       />
+
       <button
         className="btn btn-dark"
         id="btn-request-balance"
@@ -48,6 +50,7 @@ function Balance(props) {
       >
         Check Balance
       </button>
+
       <h6 hidden={isHidden}>
         This account has a balance of {balanceResult} {props.tokenSymbol}.
       </h6>

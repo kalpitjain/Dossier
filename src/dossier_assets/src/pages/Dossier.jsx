@@ -29,7 +29,6 @@ function Dossier(props) {
   useEffect(() => {
     fetchData();
   }, []);
-
   async function fetchData() {
     const logArray = await dossier.readLogs();
     setLogs(logArray);
@@ -60,6 +59,7 @@ function Dossier(props) {
         userFunds={balanceResult}
         tokenSymbol={tokenSymbol}
       />
+
       {logs.map((logItem, index) => {
         if (index % 4 === 0) {
           return (

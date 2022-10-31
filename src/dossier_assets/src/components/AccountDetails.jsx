@@ -6,6 +6,7 @@ function AccountDetails(props) {
       <h1 className="dossierFinanceBlockHeading">Accound Details</h1>
 
       <h5>Account Id: {props.userPrincipal}</h5>
+
       <h5>
         Funds: {props.userFunds} {props.tokenSymbol}
       </h5>

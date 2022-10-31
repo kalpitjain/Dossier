@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import AccountDetails from "../components/AccountDetails";
-import ActivityLogHeading from "../components/ActivityLogHeading";
 import ActivityDescription from "../components/ActivityDescription";
 import ActivityLog from "../components/ActivityLog";
 import { dossier } from "../../../declarations/dossier";
@@ -24,7 +23,6 @@ function Dossier(props) {
   useEffect(() => {
     fetchData();
   }, []);
-
   async function fetchData() {
     const activityLogArray = await dossier.readActivityLogs();
     setActivityLogs(activityLogArray);
@@ -40,12 +38,17 @@ function Dossier(props) {
         headingRedirectLink={"/"}
         accountRedirectLink={"/DossierAccount"}
       />
+
       <AccountDetails
         userPrincipal={props.loggedInPrincipal}
         userFunds={balanceResult}
         tokenSymbol={tokenSymbol}
       />
-      <ActivityLogHeading />
+
+      <div className="blocks activityLogHeading">
+        <h3>Activity Logs</h3>
+      </div>
+
       <ActivityDescription
         activity={"Activity"}
         amount={tokenSymbol}
@@ -65,8 +68,8 @@ function Dossier(props) {
                 id={index}
                 activity={activityLogItem.activity}
                 amount={activityLogItem.amount}
-                date={activityLogItem.time}
-                time={activityLogItem.date}
+                date={activityLogItem.date}
+                time={activityLogItem.time}
                 userPrincipal={props.loggedInPrincipal}
                 backgroundColour={"#72ee72"}
               />
@@ -81,8 +84,8 @@ function Dossier(props) {
                 id={index}
                 activity={activityLogItem.activity}
                 amount={activityLogItem.amount}
-                date={activityLogItem.time}
-                time={activityLogItem.date}
+                date={activityLogItem.date}
+                time={activityLogItem.time}
                 userPrincipal={props.loggedInPrincipal}
                 backgroundColour={"#ffe065"}
               />
@@ -97,8 +100,8 @@ function Dossier(props) {
                 id={index}
                 activity={activityLogItem.activity}
                 amount={activityLogItem.amount}
-                date={activityLogItem.time}
-                time={activityLogItem.date}
+                date={activityLogItem.date}
+                time={activityLogItem.time}
                 userPrincipal={props.loggedInPrincipal}
                 backgroundColour={"#ff7c65"}
               />
@@ -113,8 +116,8 @@ function Dossier(props) {
                 id={index}
                 activity={activityLogItem.activity}
                 amount={activityLogItem.amount}
-                date={activityLogItem.time}
-                time={activityLogItem.date}
+                date={activityLogItem.date}
+                time={activityLogItem.time}
                 userPrincipal={props.loggedInPrincipal}
                 backgroundColour={"#94d1ff"}
               />
@@ -129,14 +132,14 @@ function Dossier(props) {
                 id={index}
                 activity={activityLogItem.activity}
                 amount={activityLogItem.amount}
-                date={activityLogItem.time}
-                time={activityLogItem.date}
+                date={activityLogItem.date}
+                time={activityLogItem.time}
                 userPrincipal={props.loggedInPrincipal}
                 backgroundColour={"#ffb1c4"}
               />
             );
           } else {
-            return <div></div>;
+            return <div />;
           }
         })}
       </div>

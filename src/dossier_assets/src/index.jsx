@@ -8,7 +8,6 @@ import { AuthClient } from "@dfinity/auth-client";
 
 const init = async () => {
   const authClient = await AuthClient.create();
-
   if (await authClient.isAuthenticated()) {
     handleAuthenticated(authClient);
   } else {
@@ -24,14 +23,12 @@ const init = async () => {
 async function handleAuthenticated(authClient) {
   const identity = await authClient.getIdentity();
   const userPrincipal = identity._principal.toString();
-
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
     <Router>
       <Routes>
         <Route
           path="/"
-          // path="/Dossier"
           element={<Dossier loggedInPrincipal={userPrincipal} />}
         />
         <Route
@@ -40,12 +37,10 @@ async function handleAuthenticated(authClient) {
         />
         <Route
           path="/DossierAccount"
-          // path="/"
           element={<DossierAccount loggedInPrincipal={userPrincipal} />}
         />
       </Routes>
     </Router>
   );
 }
-
 init();

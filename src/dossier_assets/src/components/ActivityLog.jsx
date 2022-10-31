@@ -7,8 +7,11 @@ function ActivityLogHeading(props) {
       style={{ backgroundColor: props.backgroundColour }}
     >
       <h6 className="col">{props.activity}</h6>
+
       <h6 className="col">{props.amount}</h6>
+
       <h6 className="col">{props.time}</h6>
+
       <h6 className="col">{props.date}</h6>
     </div>
   );
