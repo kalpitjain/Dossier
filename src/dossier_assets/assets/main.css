@@ -67,7 +67,7 @@ form.create-log textarea {
   border: none;
   padding: 0.25rem;
   outline: none;
-  font-size: 1em;
+  font-size: 1rem;
   resize: none;
   text-align: center;
 }
@@ -90,6 +90,7 @@ form.create-log button {
 
 .message {
   margin-bottom: -0.8rem;
+  margin-left: -1rem;
   opacity: 50%;
 }
 
@@ -100,7 +101,7 @@ form.create-log button {
   top: -2.5rem;
   margin-right: auto;
   left: 125%;
-  width: 3.75rem;
+  width: 5rem;
   height: 2.125rem;
 }
 
@@ -119,40 +120,41 @@ form.create-log button {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ff3d3d;
+  color: #00d5ff;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 .slider:before {
   position: absolute;
-  content: "";
+  content: "  MY  ";
   height: 1.625rem;
-  width: 1.625rem;
-  left: 0.25rem;
+  width: 2.29rem;
+  left: 0.5rem;
   bottom: 0.25rem;
-  background-color: white;
+  background-color: #00191d;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-}
-
-input:checked + .slider {
-  background-color: #45e75d;
 }
 
 input:checked + .slider:before {
   -webkit-transform: translateX(1.625rem);
   -ms-transform: translateX(1.625rem);
   transform: translateX(1.625rem);
+  content: " All ";
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 2.125rem;
+  border-radius: 0.3rem;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+  border-radius: 0.3rem;
+}
+
+.switch-p {
+  margin-top: 0.25rem;
 }
 
 /* Log */

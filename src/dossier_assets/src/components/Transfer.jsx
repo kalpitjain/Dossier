@@ -34,7 +34,7 @@ function Transfer(props) {
     // // Local Network
     // const result = await dossier.transfer(recipient, amountToTransfer);
 
-    if (result === "! success !") {
+    if (result === "! Success !") {
       const time = new Date().toLocaleTimeString();
       const date = new Date().toISOString().split("T")[0];
       dossier.createActivityLog(
