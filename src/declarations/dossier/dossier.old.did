@@ -24,7 +24,7 @@ service : {
   getDeleteLogFee: () -> (nat) query;
   getSymbol: () -> (text) query;
   payOut: () -> (text);
-  readAcitivityLogs: () -> (vec ActivityLog) query;
+  readActivityLogs: () -> (vec ActivityLog) query;
   readLogs: () -> (vec Log) query;
   removeLog: (nat) -> () oneway;
   transfer: (principal, nat) -> (text);
