@@ -109,6 +109,14 @@ function CreateArea(props) {
   return (
     <div>
       <form className="create-log">
+        <label className="switch">
+          <input type="checkbox" />
+          <span
+            value={mode}
+            className="slider round"
+            onClick={changeMode}
+          ></span>
+        </label>
         {isExpanded && (
           <input
             name="title"
@@ -144,9 +152,6 @@ function CreateArea(props) {
         <p className="message" hidden={isHidden}>
           {message}
         </p>
-        <span className="switch" onClick={changeMode}>
-          {mode}
-        </span>
       </form>
     </div>
   );

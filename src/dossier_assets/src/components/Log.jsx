@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ReportIcon from "@mui/icons-material/Report";
 import {
   dossier,
   canisterId,
@@ -59,7 +60,6 @@ function Log(props) {
   return (
     <div className="log" style={{ backgroundColor: props.backgroundColour }}>
       <h1>{props.title}</h1>
-
       {props.content.length > 300 ? (
         isExpanded ? (
           <p>
@@ -79,23 +79,30 @@ function Log(props) {
       ) : (
         <p>{props.content}</p>
       )}
-
       <div className="date-time">
         <p className="time" id="time">
           {props.time}
         </p>
-        <p className="time" id="date">
+        <p className="date" id="date">
           {props.date}
         </p>
       </div>
-
-      <button
-        disabled={disabled}
-        onClick={handleDeleteClick}
-        style={{ backgroundColor: props.backgroundColour }}
-      >
-        <DeleteIcon />
-      </button>
+      {props.userId === props.userPrincipal ? (
+        <button
+          disabled={disabled}
+          onClick={handleDeleteClick}
+          style={{ backgroundColor: props.backgroundColour }}
+        >
+          <DeleteIcon />
+        </button>
+      ) : (
+        <button
+          disabled={true}
+          style={{ backgroundColor: props.backgroundColour }}
+        >
+          <ReportIcon />
+        </button>
+      )}
     </div>
   );
 }

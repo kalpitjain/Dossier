@@ -71,92 +71,97 @@ function Dossier(props) {
         userFunds={balanceResult}
         tokenSymbol={tokenSymbol}
       />
-
-      {logs.map((logItem, index) => {
-        if (
-          (Mode === "My Logs" &&
-            logItem.userId === props.loggedInPrincipal &&
-            index % 4 === 0) ||
-          (Mode === "All Logs" && index % 4 === 0)
-        ) {
-          return (
-            <Log
-              key={index}
-              id={index}
-              title={logItem.title}
-              content={logItem.content}
-              time={logItem.time}
-              date={logItem.date}
-              onDelete={deleteLog}
-              userPrincipal={logItem.userId}
-              userFunds={balanceResult}
-              backgroundColour={"#ff7c65"}
-            />
-          );
-        } else if (
-          (Mode === "My Logs" &&
-            logItem.userId === props.loggedInPrincipal &&
-            index % 4 === 1) ||
-          (Mode === "All Logs" && index % 4 === 1)
-        ) {
-          return (
-            <Log
-              key={index}
-              id={index}
-              title={logItem.title}
-              content={logItem.content}
-              time={logItem.time}
-              date={logItem.date}
-              onDelete={deleteLog}
-              userPrincipal={logItem.userId}
-              userFunds={balanceResult}
-              backgroundColour={"#ffe065"}
-            />
-          );
-        } else if (
-          (Mode === "My Logs" &&
-            logItem.userId === props.loggedInPrincipal &&
-            index % 4 === 2) ||
-          (Mode === "All Logs" && index % 4 === 2)
-        ) {
-          return (
-            <Log
-              key={index}
-              id={index}
-              title={logItem.title}
-              content={logItem.content}
-              time={logItem.time}
-              date={logItem.date}
-              onDelete={deleteLog}
-              userPrincipal={logItem.userId}
-              userFunds={balanceResult}
-              backgroundColour={"#72ee72"}
-            />
-          );
-        } else if (
-          (Mode === "My Logs" &&
-            logItem.userId === props.loggedInPrincipal &&
-            index % 4 === 3) ||
-          (Mode === "All Logs" && index % 4 === 3)
-        ) {
-          return (
-            <Log
-              key={index}
-              id={index}
-              title={logItem.title}
-              content={logItem.content}
-              time={logItem.time}
-              date={logItem.date}
-              onDelete={deleteLog}
-              userPrincipal={logItem.userId}
-              userFunds={balanceResult}
-              backgroundColour={"#94d1ff"}
-            />
-          );
-        } else {
-          return <div />;
-        }
-      })}
+      <div>
+        {logs.map((logItem, index) => {
+          if (
+            (Mode === "My Logs" &&
+              logItem.userId === props.loggedInPrincipal &&
+              index % 4 === 0) ||
+            (Mode === "All Logs" && index % 4 === 0)
+          ) {
+            return (
+              <Log
+                key={index}
+                id={index}
+                title={logItem.title}
+                content={logItem.content}
+                time={logItem.time}
+                date={logItem.date}
+                userId={logItem.userId}
+                userPrincipal={props.loggedInPrincipal}
+                userFunds={balanceResult}
+                onDelete={deleteLog}
+                backgroundColour={"#ff7c65"}
+              />
+            );
+          } else if (
+            (Mode === "My Logs" &&
+              logItem.userId === props.loggedInPrincipal &&
+              index % 4 === 1) ||
+            (Mode === "All Logs" && index % 4 === 1)
+          ) {
+            return (
+              <Log
+                key={index}
+                id={index}
+                title={logItem.title}
+                content={logItem.content}
+                time={logItem.time}
+                date={logItem.date}
+                userId={logItem.userId}
+                userPrincipal={props.loggedInPrincipal}
+                userFunds={balanceResult}
+                onDelete={deleteLog}
+                backgroundColour={"#ffe065"}
+              />
+            );
+          } else if (
+            (Mode === "My Logs" &&
+              logItem.userId === props.loggedInPrincipal &&
+              index % 4 === 2) ||
+            (Mode === "All Logs" && index % 4 === 2)
+          ) {
+            return (
+              <Log
+                key={index}
+                id={index}
+                title={logItem.title}
+                content={logItem.content}
+                time={logItem.time}
+                date={logItem.date}
+                userId={logItem.userId}
+                userPrincipal={props.loggedInPrincipal}
+                userFunds={balanceResult}
+                onDelete={deleteLog}
+                backgroundColour={"#72ee72"}
+              />
+            );
+          } else if (
+            (Mode === "My Logs" &&
+              logItem.userId === props.loggedInPrincipal &&
+              index % 4 === 3) ||
+            (Mode === "All Logs" && index % 4 === 3)
+          ) {
+            return (
+              <Log
+                key={index}
+                id={index}
+                title={logItem.title}
+                content={logItem.content}
+                time={logItem.time}
+                date={logItem.date}
+                userId={logItem.userId}
+                userPrincipal={props.loggedInPrincipal}
+                userFunds={balanceResult}
+                onDelete={deleteLog}
+                backgroundColour={"#94d1ff"}
+              />
+            );
+          } else {
+            return <div />;
+          }
+        })}
+      </div>
     </div>
   );
 }

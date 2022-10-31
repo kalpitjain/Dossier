@@ -2,10 +2,19 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "McLaren", cursive;
 }
 
-html {
-  font-family: "Montserrat", sans-serif;
+h1 {
+  font-weight: 800;
+}
+
+h3 {
+  font-weight: 600;
+}
+
+h6 {
+  font-weight: 600;
 }
 
 body {
@@ -32,8 +41,6 @@ body {
   margin: 1rem;
   margin-top: -0.5rem;
   color: #00d5ff;
-  font-family: "McLaren", cursive;
-  font-weight: 800;
 }
 
 .header h6 {
@@ -46,7 +53,7 @@ body {
 form.create-log {
   position: relative;
   width: 54%;
-  margin: 9.2rem auto 7rem auto;
+  margin: 9.2rem auto 5rem auto;
   background: #9beeff;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -60,8 +67,7 @@ form.create-log textarea {
   border: none;
   padding: 0.25rem;
   outline: none;
-  font-size: 1.2em;
-  font-family: inherit;
+  font-size: 1em;
   resize: none;
   text-align: center;
 }
@@ -83,28 +89,70 @@ form.create-log button {
 }
 
 .message {
-  margin-bottom: -1rem;
+  margin-bottom: -0.8rem;
   opacity: 50%;
 }
 
+/* The switch - the box around the slider */
 .switch {
-  position: relative;
-  background: #00191d;
-  color: #00d5ff;
-  border: none;
-  border-radius: 0.3rem;
-  padding: 0.5rem;
-  box-shadow: 0 1px 3px #00191d;
-  cursor: pointer;
-  outline: none;
-  text-align: center;
-  z-index: 1;
-  top: 4rem;
+  position: absolute;
+  display: inline-block;
+  top: -2.5rem;
+  margin-right: auto;
+  left: 125%;
+  width: 3.75rem;
+  height: 2.125rem;
 }
 
-.switch:hover {
-  background-color: #00d5ff;
-  color: #00191d;
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ff3d3d;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.625rem;
+  width: 1.625rem;
+  left: 0.25rem;
+  bottom: 0.25rem;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #45e75d;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(1.625rem);
+  -ms-transform: translateX(1.625rem);
+  transform: translateX(1.625rem);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 2.125rem;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 
 /* Log */
@@ -120,7 +168,7 @@ form.create-log button {
   text-align: center;
 }
 .log h1 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   margin-bottom: 0.7rem;
   padding-left: 3rem;
   padding-right: 3rem;
@@ -184,7 +232,6 @@ form.create-log button {
   bottom: -2.5rem;
   padding: 0rem 0rem 0rem 0rem;
   font-size: 1rem;
-  font-weight: 600;
   margin: 0;
   opacity: 0.7;
 }
@@ -195,7 +242,6 @@ form.create-log button {
   padding: 0rem 0rem 0rem 0rem;
   margin: 0;
   font-size: 0.7rem;
-  font-weight: 600;
   opacity: 0.7;
 }
 
@@ -281,10 +327,8 @@ form.create-log button {
 }
 
 .transfer h3 {
-  color: #640101;
+  color: #2a0505;
   margin: 1rem;
-  font-family: "McLaren", cursive;
-  font-weight: 600;
 }
 
 .transfer h6 {
@@ -310,11 +354,12 @@ form.create-log button {
 
 .account-details h5 {
   margin-top: 1rem;
+  font-weight: 800;
 }
 
 .activityLogHeading {
-  margin-top: -1.2rem;
-  margin-bottom: 2rem;
+  margin-top: -1.75rem;
+  margin-bottom: 1.75rem;
   padding: 0.5rem;
   background-color: #00191d;
 }
@@ -326,9 +371,14 @@ form.create-log button {
 
 .activityDescription {
   padding: 0.5rem;
-  padding-top: 0.75rem;
+  padding-top: 0.5rem;
   background-color: #b1b7ff;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.activityDescription h4 {
+  font-weight: 800;
+  margin-bottom: -0.2rem;
 }
 
 .activityLog {
