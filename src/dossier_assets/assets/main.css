@@ -90,71 +90,27 @@ form.create-log button {
 
 .message {
   margin-bottom: -0.8rem;
-  margin-left: -1rem;
+  margin-left: -0.8rem;
   opacity: 50%;
 }
 
 /* The switch - the box around the slider */
 .switch {
   position: absolute;
-  display: inline-block;
-  top: -2.5rem;
-  margin-right: auto;
-  left: 125%;
-  width: 5rem;
-  height: 2.125rem;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  background: #00191d;
   color: #00d5ff;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  box-shadow: 0 1px 3px #00191d;
+  left: 125%;
+  top: -2.5rem;
+  width: 6rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 0.25rem;
 }
 
-.slider:before {
-  position: absolute;
-  content: "  MY  ";
-  height: 1.625rem;
-  width: 2.29rem;
-  left: 0.5rem;
-  bottom: 0.25rem;
-  background-color: #00191d;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(1.625rem);
-  -ms-transform: translateX(1.625rem);
-  transform: translateX(1.625rem);
-  content: " All ";
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 0.3rem;
-}
-
-.slider.round:before {
-  border-radius: 0.3rem;
-}
-
-.switch-p {
-  margin-top: 0.25rem;
+.switch:hover {
+  background-color: #00d5ff;
+  color: #00191d;
 }
 
 /* Log */
