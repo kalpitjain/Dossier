@@ -9,6 +9,7 @@ function Dossier(props) {
   const [logs, setLogs] = useState([]);
   const [balanceResult, setBalanceResult] = useState("0");
   const [tokenSymbol, setTokenSymbol] = useState("");
+  const [Mode, setMode] = useState("All Logs");
 
   async function getData() {
     const balance = await dossier.balanceOf(
@@ -21,7 +22,13 @@ function Dossier(props) {
 
   function addLog(newLog) {
     setLogs((prevLogs) => {
-      dossier.createLog(newLog.title, newLog.content, newLog.time, newLog.date);
+      dossier.createLog(
+        newLog.userId,
+        newLog.title,
+        newLog.content,
+        newLog.time,
+        newLog.date
+      );
       return [newLog, ...prevLogs];
     });
   }
@@ -43,6 +50,10 @@ function Dossier(props) {
     });
   }
 
+  function mode(mode) {
+    setMode(mode);
+  }
+
   return (
     <div>
       <Header
@@ -55,13 +66,19 @@ function Dossier(props) {
       />
       <CreateArea
         onAdd={addLog}
+        getMode={mode}
         userPrincipal={props.loggedInPrincipal}
         userFunds={balanceResult}
         tokenSymbol={tokenSymbol}
       />
 
       {logs.map((logItem, index) => {
-        if (index % 4 === 0) {
+        if (
+          (Mode === "My Logs" &&
+            logItem.userId === props.loggedInPrincipal &&
+            index % 4 === 0) ||
+          (Mode === "All Logs" && index % 4 === 0)
+        ) {
           return (
             <Log
               key={index}
@@ -71,12 +88,17 @@ function Dossier(props) {
               time={logItem.time}
               date={logItem.date}
               onDelete={deleteLog}
-              userPrincipal={props.loggedInPrincipal}
+              userPrincipal={logItem.userId}
               userFunds={balanceResult}
               backgroundColour={"#ff7c65"}
             />
           );
-        } else if (index % 4 === 1) {
+        } else if (
+          (Mode === "My Logs" &&
+            logItem.userId === props.loggedInPrincipal &&
+            index % 4 === 1) ||
+          (Mode === "All Logs" && index % 4 === 1)
+        ) {
           return (
             <Log
               key={index}
@@ -86,12 +108,17 @@ function Dossier(props) {
               time={logItem.time}
               date={logItem.date}
               onDelete={deleteLog}
-              userPrincipal={props.loggedInPrincipal}
+              userPrincipal={logItem.userId}
               userFunds={balanceResult}
               backgroundColour={"#ffe065"}
             />
           );
-        } else if (index % 4 === 2) {
+        } else if (
+          (Mode === "My Logs" &&
+            logItem.userId === props.loggedInPrincipal &&
+            index % 4 === 2) ||
+          (Mode === "All Logs" && index % 4 === 2)
+        ) {
           return (
             <Log
               key={index}
@@ -101,12 +128,17 @@ function Dossier(props) {
               time={logItem.time}
               date={logItem.date}
               onDelete={deleteLog}
-              userPrincipal={props.loggedInPrincipal}
+              userPrincipal={logItem.userId}
               userFunds={balanceResult}
               backgroundColour={"#72ee72"}
             />
           );
-        } else {
+        } else if (
+          (Mode === "My Logs" &&
+            logItem.userId === props.loggedInPrincipal &&
+            index % 4 === 3) ||
+          (Mode === "All Logs" && index % 4 === 3)
+        ) {
           return (
             <Log
               key={index}
@@ -116,11 +148,13 @@ function Dossier(props) {
               time={logItem.time}
               date={logItem.date}
               onDelete={deleteLog}
-              userPrincipal={props.loggedInPrincipal}
+              userPrincipal={logItem.userId}
               userFunds={balanceResult}
               backgroundColour={"#94d1ff"}
             />
           );
+        } else {
+          return <div />;
         }
       })}
     </div>

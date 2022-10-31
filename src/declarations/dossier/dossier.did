@@ -4,6 +4,7 @@ type Log =
    date: text;
    time: text;
    title: text;
+   userId: text;
  };
 type ActivityLog = 
  record {
@@ -16,7 +17,7 @@ type ActivityLog =
 service : {
   balanceOf: (principal) -> (nat) query;
   createActivityLog: (text, text, text, text, text) -> () oneway;
-  createLog: (text, text, text, text) -> () oneway;
+  createLog: (text, text, text, text, text) -> () oneway;
   deductCreateLogFee: () -> (text);
   deductDeleteLogFee: () -> (text);
   faucetAmount: () -> (nat) query;

@@ -46,7 +46,7 @@ body {
 form.create-log {
   position: relative;
   width: 54%;
-  margin: 9.2rem auto 5rem auto;
+  margin: 9.2rem auto 7rem auto;
   background: #9beeff;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -83,8 +83,28 @@ form.create-log button {
 }
 
 .message {
-  margin-bottom: 0rem;
+  margin-bottom: -1rem;
   opacity: 50%;
+}
+
+.switch {
+  position: relative;
+  background: #00191d;
+  color: #00d5ff;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  box-shadow: 0 1px 3px #00191d;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  z-index: 1;
+  top: 4rem;
+}
+
+.switch:hover {
+  background-color: #00d5ff;
+  color: #00191d;
 }
 
 /* Log */

@@ -9,6 +9,7 @@ export const idlFactory = ({ IDL }) => {
   const Log = IDL.Record({
     'title' : IDL.Text,
     'content' : IDL.Text,
+    'userId' : IDL.Text,
     'date' : IDL.Text,
     'time' : IDL.Text,
   });
@@ -20,7 +21,7 @@ export const idlFactory = ({ IDL }) => {
         ['oneway'],
       ),
     'createLog' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
         [],
         ['oneway'],
       ),

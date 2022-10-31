@@ -4,10 +4,10 @@ import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
 import {
   dossier,
-  // canisterId,
-  // createActor,
+  canisterId,
+  createActor,
 } from "../../../declarations/dossier";
-// import { AuthClient } from "@dfinity/auth-client";
+import { AuthClient } from "@dfinity/auth-client";
 
 function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
@@ -15,18 +15,20 @@ function CreateArea(props) {
   const [disabled, setDisabled] = useState(false);
   const [isHidden, setHidden] = useState(true);
   const [message, setmessage] = useState();
+  const [mode, setMode] = useState("All Logs");
 
   async function getLogCreationFee() {
     const fee = await dossier.getCreateLogFee();
     setLogCreationFee(parseInt(fee.toLocaleString()));
   }
-  getLogCreationFee();
+  getLogCreationFee(props);
 
   const time = new Date().toLocaleTimeString();
   const date = new Date().toISOString().split("T")[0];
   const [log, setLog] = useState({
     title: "",
     content: "",
+    userId: props.userPrincipal,
     time: time,
     date: date,
   });
@@ -39,6 +41,7 @@ function CreateArea(props) {
     setLog((prevLog) => {
       return {
         ...prevLog,
+        userId: props.userPrincipal,
         time: currentTime,
         date: currentDate,
         [name]: value,
@@ -48,18 +51,18 @@ function CreateArea(props) {
 
   async function submitLog(event) {
     setDisabled(true);
-    // // Live Network
-    // const authClient = await AuthClient.create();
-    // const identity = await authClient.getIdentity();
-    // const authenticatedCanister = createActor(canisterId, {
-    //   agentOptions: {
-    //     identity,
-    //   },
-    // });
-    // const result = await authenticatedCanister.deductCreateLogFee();
+    // Live Network
+    const authClient = await AuthClient.create();
+    const identity = await authClient.getIdentity();
+    const authenticatedCanister = createActor(canisterId, {
+      agentOptions: {
+        identity,
+      },
+    });
+    const result = await authenticatedCanister.deductCreateLogFee();
 
-    // Local Network
-    const result = await dossier.deductCreateLogFee();
+    // // Local Network
+    // const result = await dossier.deductCreateLogFee();
 
     if (result === "! Success !") {
       dossier.createActivityLog(
@@ -75,6 +78,7 @@ function CreateArea(props) {
     setLog({
       title: "",
       content: "",
+      userId: props.userPrincipal,
       time: time,
       date: date,
     });
@@ -88,6 +92,18 @@ function CreateArea(props) {
 
   function expand() {
     setExpanded(true);
+  }
+
+  function changeMode() {
+    setMode((prev) => {
+      if (prev === "All Logs") {
+        props.getMode("My Logs");
+        return "My Logs";
+      } else {
+        props.getMode("All Logs");
+        return "All Logs";
+      }
+    });
   }
 
   return (
@@ -128,6 +144,9 @@ function CreateArea(props) {
         <p className="message" hidden={isHidden}>
           {message}
         </p>
+        <span className="switch" onClick={changeMode}>
+          {mode}
+        </span>
       </form>
     </div>
   );

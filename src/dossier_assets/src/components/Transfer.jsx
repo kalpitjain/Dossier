@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Principal } from "@dfinity/principal";
 import {
   dossier,
-  // canisterId,
-  // createActor,
+  canisterId,
+  createActor,
 } from "../../../declarations/dossier";
-// import { AuthClient } from "@dfinity/auth-client";
+import { AuthClient } from "@dfinity/auth-client";
 
 function Transfer(props) {
   const [recipientId, setRecipientId] = useState("");
@@ -18,21 +18,21 @@ function Transfer(props) {
     const recipient = Principal.fromText(recipientId);
     const amountToTransfer = Number(amount);
 
-    // // Live Network
-    // const authClient = await AuthClient.create();
-    // const identity = await authClient.getIdentity();
-    // const authenticatedCanister = createActor(canisterId, {
-    //   agentOptions: {
-    //     identity,
-    //   },
-    // });
-    // const result = await authenticatedCanister.transfer(
-    //   recipient,
-    //   amountToTransfer
-    // );
+    // Live Network
+    const authClient = await AuthClient.create();
+    const identity = await authClient.getIdentity();
+    const authenticatedCanister = createActor(canisterId, {
+      agentOptions: {
+        identity,
+      },
+    });
+    const result = await authenticatedCanister.transfer(
+      recipient,
+      amountToTransfer
+    );
 
-    // Local Network
-    const result = await dossier.transfer(recipient, amountToTransfer);
+    // // Local Network
+    // const result = await dossier.transfer(recipient, amountToTransfer);
 
     if (result === "! success !") {
       const time = new Date().toLocaleTimeString();

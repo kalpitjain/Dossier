@@ -9,6 +9,7 @@ export interface ActivityLog {
 export interface Log {
   'title' : string,
   'content' : string,
+  'userId' : string,
   'date' : string,
   'time' : string,
 }
@@ -26,6 +27,7 @@ export interface _SERVICE {
       arg_1: string,
       arg_2: string,
       arg_3: string,
+      arg_4: string,
     ) => Promise<undefined>,
   'deductCreateLogFee' : () => Promise<string>,
   'deductDeleteLogFee' : () => Promise<string>,

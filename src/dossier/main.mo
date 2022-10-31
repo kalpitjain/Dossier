@@ -126,6 +126,7 @@ actor dossier{
   // Dossier 
   // Create Log 
   public type Log = {
+    userId: Text;
     title: Text;
     content: Text;
     time: Text;
@@ -134,8 +135,9 @@ actor dossier{
 
   stable var logs: List.List<Log> = List.nil<Log>();
 
-  public func createLog(titleText: Text, contentText: Text, timeText: Text, dateText: Text){
+  public func createLog(userIdText: Text, titleText: Text, contentText: Text, timeText: Text, dateText: Text){
       let newLog: Log = {
+        userId = userIdText;
         title = titleText;
         content = contentText;
         time = timeText;
