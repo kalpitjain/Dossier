@@ -22,7 +22,6 @@ body {
 }
 
 /* Dossier CSS */
-
 /* Header */
 
 .header {
@@ -49,7 +48,6 @@ body {
 }
 
 /* Form Box */
-
 form.create-log {
   position: relative;
   width: 54%;
@@ -94,7 +92,6 @@ form.create-log button {
   opacity: 50%;
 }
 
-/* The switch - the box around the slider */
 .switch {
   position: absolute;
   background: #00191d;
@@ -114,7 +111,6 @@ form.create-log button {
 }
 
 /* Log */
-
 .log {
   background: #9beeff;
   border-radius: 0.5rem;
@@ -204,7 +200,6 @@ form.create-log button {
 }
 
 /* Dossier Finace CSS */
-
 #screen {
   margin-top: 8rem;
 }
@@ -219,7 +214,6 @@ form.create-log button {
 }
 
 /* Faucet */
-
 .faucet {
   background-color: #72ee72;
 }
@@ -238,7 +232,6 @@ form.create-log button {
 }
 
 /* Balance */
-
 .balance {
   background-color: #ffe065;
 }
@@ -264,7 +257,6 @@ form.create-log button {
 }
 
 /* Transfer */
-
 .transfer {
   background-color: #ff7c65;
 }

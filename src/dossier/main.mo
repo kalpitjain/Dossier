@@ -1,3 +1,4 @@
+// Module Imports
 import List "mo:base/List";
 import HashMap "mo:base/HashMap";
 import Principal "mo:base/Principal";
@@ -6,23 +7,17 @@ import Iter "mo:base/Iter";
 
 
 actor dossier{
-
   // Tokenomics and Token Details ( All Hard Coded Values )
   let totalSupply: Nat = 1000000000000;
   let symbol: Text = "DOSS";
   let foundationPrincipal: Text = "4sgdh-3mrsd-3k7t6-2wche-fz6k5-nyjwg-lna6q-o4wz2-qvtuv-heoml-iqe";
   let faucetPrincipal: Text = "vuuo7-hyaaa-aaaal-qbfja-cai";
-  // Live Canister ID - vuuo7-hyaaa-aaaal-qbfja-cai
-  // Live Canister Frontend ID - vtvil-kaaaa-aaaal-qbfjq-cai
-  //  Live Website Link - vtvil-kaaaa-aaaal-qbfjq-cai.raw.ic0.app
-  // Local Canister ID - rrkah-fqaaa-aaaaa-aaaaq-cai
   let giveAmount = 5000;
   let createLogFee: Nat = 5;
   let deleteLogFee: Nat = 1;
 
   // Owner Principal
   let foundation : Principal = Principal.fromText(foundationPrincipal);
-  
   // Faucet Principal 
   let faucet : Principal = Principal.fromText(faucetPrincipal);
 
@@ -159,8 +154,7 @@ actor dossier{
       logs := List.append(listFront, listBack);
   };
 
-  // 
-
+  // Dossier Account
   public type ActivityLog = {
     user: Text;
     activity: Text;
@@ -189,7 +183,6 @@ actor dossier{
   };
 
   // 
-
   system func preupgrade(){
     balanceEntries:= Iter.toArray(balances.entries());
   };
