@@ -64,7 +64,13 @@ function Faucet(props) {
       <h1 className="dossierFinanceBlockHeading">Faucet</h1>
 
       <h6>Get your free Dossier tokens here !</h6>
-      <h6>{messageText}</h6>
+      <h6
+        onClick={() => {
+          console.log(navigator.clipboard.writeText(props.userPrincipal));
+        }}
+      >
+        {messageText}
+      </h6>
 
       <button
         disabled={isDisabled}

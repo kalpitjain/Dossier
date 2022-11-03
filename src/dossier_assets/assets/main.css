@@ -225,6 +225,7 @@ form.create-log button {
 .faucet h6 {
   color: #082a05;
   margin: 1rem;
+  cursor: pointer;
 }
 
 .faucet button {
@@ -305,6 +306,7 @@ form.create-log button {
 .account-details h5 {
   margin-top: 1rem;
   font-weight: 800;
+  cursor: pointer;
 }
 
 .activityLogHeading {
